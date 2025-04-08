@@ -33,7 +33,8 @@ public class AdminPanelController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+        String disasterTitle = request.getParameter("disasterTitle");
+        System.out.println("Disaster Name: " + disasterTitle);
 		doGet(request, response);
 	}
 
