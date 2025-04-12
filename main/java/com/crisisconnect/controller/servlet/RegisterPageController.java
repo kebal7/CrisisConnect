@@ -8,16 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class LandingPageController
+ * Servlet implementation class RegisterPageController
  */
-@WebServlet({ "/landingpage", "/index", "/"})
-public class LandingPageController extends HttpServlet {
+@WebServlet("/register")
+public class RegisterPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LandingPageController() {
+    public RegisterPageController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,14 +26,15 @@ public class LandingPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/pages/landingpage.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/pages/register.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+        String userName = request.getParameter("username");
+        System.out.println("User Name: " + userName);
 		doGet(request, response);
 	}
 

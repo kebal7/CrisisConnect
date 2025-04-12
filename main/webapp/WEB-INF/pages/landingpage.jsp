@@ -59,8 +59,8 @@
 	    <div class="container">
         <h1>Welcome to Disaster View</h1>
         <p>Please login or register to continue.</p>
-        <a href="login.jsp"><button class="btn btn-login">Login</button></a>
-        <a href="register.jsp"><button class="btn btn-register">Register</button></a>
+        <a href="login"><button class="btn btn-login">Login</button></a>
+        <a href="register"><button class="btn btn-register">Register</button></a>
     	</div>
 </body>
 </html>
