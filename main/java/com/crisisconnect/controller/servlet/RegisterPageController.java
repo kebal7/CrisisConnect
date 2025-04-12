@@ -1,5 +1,8 @@
 package com.crisisconnect.controller.servlet;
 
+import com.crisisconnect.model.UserModel;
+import com.crisisconnect.service.RegistrationService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,6 +15,9 @@ import java.io.IOException;
  */
 @WebServlet("/register")
 public class RegisterPageController extends HttpServlet {
+	
+	private final RegistrationService registrationService;
+	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -19,7 +25,7 @@ public class RegisterPageController extends HttpServlet {
      */
     public RegisterPageController() {
         super();
-        // TODO Auto-generated constructor stub
+        this.registrationService = new RegistrationService();
     }
 
 	/**
@@ -38,11 +44,17 @@ public class RegisterPageController extends HttpServlet {
         String password = request.getParameter("password");
         String userType = request.getParameter("usertype");
         
-        System.out.println("User Name: " + userName);
-        System.out.println("E-mail: " + email);
-        System.out.println("Password: " + password);
-        System.out.println("User Type: " + userType);
         
+        UserModel user = new UserModel(userName, email, userType, password);
+        
+		// Call RegistrationService to register the student
+		try {
+			int result = registrationService.registerUser(user);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
         
 		doGet(request, response);
 	}

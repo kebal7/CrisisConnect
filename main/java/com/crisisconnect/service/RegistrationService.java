@@ -1,0 +1,56 @@
+package com.crisisconnect.service;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.crisisconnect.config.DbConfig;
+import com.crisisconnect.model.UserModel;
+
+
+public class RegistrationService {
+	private Connection dbConn;
+	
+	public RegistrationService() {
+		try {
+			this.dbConn = DbConfig.getDbConnection();
+		}catch(SQLException | ClassNotFoundException ex) {
+			System.err.println("Database connection error:"+ ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
+	
+	public int registerUser(UserModel user) throws ClassNotFoundException {
+
+		try {
+			
+			String query_register_user = "INSERT INTO user ("
+					+ "username, email, usertype, password) "
+					+ "VALUES (?, ?, ?, ?)";
+			
+			PreparedStatement stmt = dbConn.prepareStatement(query_register_user);
+
+			// Set the user information in the prepared statement
+			stmt.setString(1, user.getUsername());
+			stmt.setString(2, user.getEmail());
+			stmt.setString(3, user.getUsertype());
+			stmt.setString(4, user.getPassword());
+
+
+			// Execute the update statement and store the number of affected rows
+			int result = stmt.executeUpdate();
+
+			// Check if the update was successful (i.e., at least one row affected)
+			if (result > 0) {
+				return 1; // Registration successful
+			} else {
+				return 0; // Registration failed (no rows affected)
+			}
+
+		} catch (SQLException ex) {
+			// Print the stack trace for debugging purposes
+			ex.printStackTrace();
+			return -1; // Internal error
+		}
+	}
+}
