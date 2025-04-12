@@ -34,7 +34,16 @@ public class RegisterPageController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userName = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String userType = request.getParameter("usertype");
+        
         System.out.println("User Name: " + userName);
+        System.out.println("E-mail: " + email);
+        System.out.println("Password: " + password);
+        System.out.println("User Type: " + userType);
+        
+        
 		doGet(request, response);
 	}
 

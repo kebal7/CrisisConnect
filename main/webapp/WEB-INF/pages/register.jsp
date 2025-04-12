@@ -63,13 +63,27 @@
 <body>
 	<div class="register-container">
         <h2>Create Account</h2>
-        <form action="RegisterPageController" method="post">
+        
+        <script>
+		    function validateForm() {
+		        var password = document.getElementsByName("password")[0].value;
+		        var confirmPassword = document.getElementsByName("confirmPassword")[0].value;
+		        
+		        if (password !== confirmPassword) {
+		            alert("Passwords do not match!");
+		            return false;
+		        }
+		        return true;
+		    }
+		</script>
+        
+        <form action="" method="post" onsubmit="return validateForm()">
             <input type="text" name="username" placeholder="Username" required />
             <input type="email" name="email" placeholder="Email" required />
             <input type="password" name="password" placeholder="Password" required />
             <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
             
-            <select name="userType" required>
+            <select name="usertype" required>
         		<option value="" disabled selected>Select User Type</option>
         		<option value="user">User</option>
         		<option value="admin">Admin</option>
