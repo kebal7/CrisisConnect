@@ -54,7 +54,7 @@ public class LoginPageController extends HttpServlet {
 		            // Login successful
 		        	HttpSession userSession = request.getSession();
 					userSession.setAttribute("username", formUserName);
-					request.getRequestDispatcher("WEB-INF/pages/home.jsp").forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/home");
 			 }
 			
 		} catch (ClassNotFoundException e) {
