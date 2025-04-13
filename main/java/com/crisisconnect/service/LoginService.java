@@ -54,5 +54,26 @@ public class LoginService {
 			return -2;
 		}
 	}
+	
+	public String getUserRole(LoginModel loginModel) throws ClassNotFoundException{
+		try {
+			String user_role_query = "SELECT usertype FROM user WHERE username = ?";
+			PreparedStatement stmt = dbConn.prepareStatement(user_role_query);
+			
+			stmt.setString(1, loginModel.getUsername());
+			
+			ResultSet result = stmt.executeQuery();
+			
+			if(result.next()) {
+				return result.getString("usertype");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return null;
+	}
 
 }

@@ -52,8 +52,17 @@ public class LoginPageController extends HttpServlet {
 			
 			 if (loginResult == 1) {
 		            // Login successful
+				 	String userType = loginService.getUserRole(loginModel);
+				 	
 		        	HttpSession userSession = request.getSession();
 					userSession.setAttribute("username", formUserName);
+					userSession.setAttribute("usertype", userType);
+					
+					userSession.setMaxInactiveInterval(30*60);
+					
+					System.out.println(request.getSession().getAttribute("username"));
+					System.out.println(request.getSession().getAttribute("usertype"));
+					
 					response.sendRedirect(request.getContextPath() + "/home");
 			 }
 			
