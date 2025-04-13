@@ -50,13 +50,17 @@ public class RegisterPageController extends HttpServlet {
 		// Call RegistrationService to register the student
 		try {
 			int result = registrationService.registerUser(user);
+			
+			if(result == 0) {
+				System.out.print("Registration Failed");			
+			}else {
+				response.sendRedirect(request.getContextPath() + "/login");
+			}
+			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-        
-		doGet(request, response);
 	}
 
 }
