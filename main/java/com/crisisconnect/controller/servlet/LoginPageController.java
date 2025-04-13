@@ -5,13 +5,22 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
+
+import com.crisisconnect.model.LoginModel;
+import com.crisisconnect.service.LoginService;
+import com.crisisconnect.service.RegistrationService;
 
 /**
  * Servlet implementation class LoginPageController
  */
 @WebServlet("/login")
 public class LoginPageController extends HttpServlet {
+	
+	private final LoginService loginService;
+	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -19,7 +28,7 @@ public class LoginPageController extends HttpServlet {
      */
     public LoginPageController() {
         super();
-        // TODO Auto-generated constructor stub
+        this.loginService = new LoginService();
     }
 
 	/**
@@ -36,9 +45,22 @@ public class LoginPageController extends HttpServlet {
 		String formUserName = request.getParameter("username");
 		String formPassword = request.getParameter("password");
 		
+		LoginModel loginModel = new LoginModel(formUserName, formPassword);
 		
-		
-		doGet(request, response);
+		try {
+			int loginResult = loginService.getUserLoginInfo(loginModel);
+			
+			 if (loginResult == 1) {
+		            // Login successful
+		        	HttpSession userSession = request.getSession();
+					userSession.setAttribute("username", formUserName);
+					request.getRequestDispatcher("WEB-INF/pages/home.jsp").forward(request, response);
+			 }
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
