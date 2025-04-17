@@ -2,6 +2,7 @@ package com.crisisconnect.service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.crisisconnect.config.DbConfig;
@@ -56,6 +57,28 @@ public class RegistrationService {
 			// Print the stack trace for debugging purposes
 			ex.printStackTrace();
 			return -1; // Internal error
+		}
+	}
+	
+	public int isUniqueUsername(String formUserName) {
+		String query_get_username = "SELECT username FROM users";
+		
+		try {
+			PreparedStatement stmt = dbConn.prepareStatement(query_get_username);
+			
+			ResultSet result = stmt.executeQuery();
+			
+			while(result.next()) {
+				if(result.getString("username").equals(formUserName)) {
+					return 0; //return 0 username is matched
+				}
+			}
+			
+			return 1; //return 1 is username is unmatched in database ==>> unique
+		} catch (SQLException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+			return -1; //return -1 if internal error
 		}
 	}
 }

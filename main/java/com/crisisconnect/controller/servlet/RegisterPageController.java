@@ -51,20 +51,30 @@ public class RegisterPageController extends HttpServlet {
         
         UserModel user = new UserModel(userName, fullName, userType, password, email, phoneNumber, dob, address, imagePath);
         
-		// Call RegistrationService to register the student
-		try {
-			int result = registrationService.registerUser(user);
-			
-			if(result == 0) {
-				System.out.print("Registration Failed");			
-			}else {
-				response.sendRedirect(request.getContextPath() + "/login");
-			}
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        int isUniqueUsername = registrationService.isUniqueUsername(userName);
+        
+        if(isUniqueUsername == -1) {
+        	System.out.println("Sorry Internal Error Occured Please Try Again Later");
+        }else if(isUniqueUsername == 0) {
+        	System.out.println("Sorry Username already taken");
+        	response.sendRedirect(request.getContextPath() + "/register");
+        }else {
+    		// Call RegistrationService to register the student
+    		try {
+    			int result = registrationService.registerUser(user);
+    			
+    			if(result == 0) {
+    				System.out.print("Registration Failed");			
+    			}else {
+    				response.sendRedirect(request.getContextPath() + "/login");
+    			}
+    			
+    		} catch (ClassNotFoundException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+        }
+        
 	}
 
 }
