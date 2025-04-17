@@ -57,7 +57,7 @@ public class LoginService {
 	
 	public String getUserRole(LoginModel loginModel) throws ClassNotFoundException{
 		try {
-			String user_role_query = "SELECT usertype FROM user WHERE username = ?";
+			String user_role_query = "SELECT user_type FROM users WHERE username = ?";
 			PreparedStatement stmt = dbConn.prepareStatement(user_role_query);
 			
 			stmt.setString(1, loginModel.getUsername());
@@ -65,7 +65,7 @@ public class LoginService {
 			ResultSet result = stmt.executeQuery();
 			
 			if(result.next()) {
-				return result.getString("usertype");
+				return result.getString("user_type");
 			}
 			
 		} catch (SQLException e) {

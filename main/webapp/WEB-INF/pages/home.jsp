@@ -130,10 +130,15 @@
 
 </head>
 <body>
+<%
+    String username = (String) session.getAttribute("username");
+    String  usertype= (String) session.getAttribute("usertype");
+%>
+
 <div class="header">
     <h1>CrisisConnect</h1>
     <div>
-        <span class="welcome">Welcome, <strong><%= "username" %></strong> (<%= "usertype" %>)</span>
+        <span class="welcome">Welcome, <strong><%=username%></strong> (<%=usertype  %>)</span>
         <a href="logout.jsp" class="logout">Logout</a>
     </div>
 </div>
