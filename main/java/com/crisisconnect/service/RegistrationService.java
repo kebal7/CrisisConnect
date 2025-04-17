@@ -24,17 +24,22 @@ public class RegistrationService {
 
 		try {
 			
-			String query_register_user = "INSERT INTO user ("
-					+ "username, email, usertype, password) "
-					+ "VALUES (?, ?, ?, ?)";
+			String query_register_user = "INSERT INTO users("
+					+ "username, full_name, user_type, password, email, phone_number, dob, address, image_path) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement stmt = dbConn.prepareStatement(query_register_user);
 
 			// Set the user information in the prepared statement
 			stmt.setString(1, user.getUsername());
-			stmt.setString(2, user.getEmail());
-			stmt.setString(3, user.getUsertype());
+			stmt.setString(2, user.getFullName());
+			stmt.setString(3, user.getUserType());
 			stmt.setString(4, user.getPassword());
+			stmt.setString(5, user.getEmail());
+			stmt.setString(6, user.getPhoneNumber());
+			stmt.setString(7, user.getDateOfBirth());
+			stmt.setString(8, user.getAddress());
+			stmt.setString(9, user.getImagePath());
 
 
 			// Execute the update statement and store the number of affected rows

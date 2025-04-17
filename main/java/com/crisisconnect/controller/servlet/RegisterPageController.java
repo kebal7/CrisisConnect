@@ -39,13 +39,17 @@ public class RegisterPageController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String userName = request.getParameter("username");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String userType = request.getParameter("usertype");
+		String userName = request.getParameter("username");
+		String fullName = request.getParameter("fullName");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String phoneNumber = request.getParameter("phoneNumber");
+		String dob = request.getParameter("dob");
+		String address = request.getParameter("address");
+		String userType = request.getParameter("usertype");
+		String imagePath = "null";
         
-        
-        UserModel user = new UserModel(userName, email, userType, password);
+        UserModel user = new UserModel(userName, fullName, userType, password, email, phoneNumber, dob, address, imagePath);
         
 		// Call RegistrationService to register the student
 		try {

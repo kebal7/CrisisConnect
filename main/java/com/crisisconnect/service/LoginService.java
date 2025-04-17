@@ -22,7 +22,7 @@ public class LoginService {
 	
 	public int getUserLoginInfo(LoginModel loginModel) throws ClassNotFoundException {
 		try {
-			String query_login_user = "SELECT * FROM user WHERE username = ?";
+			String query_login_user = "SELECT * FROM users WHERE username = ?";
 			PreparedStatement stmt = dbConn.prepareStatement(query_login_user);
 
 			stmt.setString(1, loginModel.getUsername());
