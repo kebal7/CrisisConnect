@@ -61,20 +61,20 @@ public class RegistrationService {
 	}
 	
 	public int isUniqueUsername(String formUserName) {
-		String query_get_username = "SELECT username FROM users";
+		String query_get_username = "SELECT username FROM users WHERE username = ?";
 		
 		try {
 			PreparedStatement stmt = dbConn.prepareStatement(query_get_username);
+			stmt.setString(1, formUserName);
 			
 			ResultSet result = stmt.executeQuery();
 			
-			while(result.next()) {
-				if(result.getString("username").equals(formUserName)) {
-					return 0; //return 0 username is matched
-				}
+			if(result.next()) {
+				return 0; //return 0 username is matched
+			}else {
+				return 1; //return 1 is username is unmatched in database ==>> unique
 			}
 			
-			return 1; //return 1 is username is unmatched in database ==>> unique
 		} catch (SQLException ex) {
 			// TODO Auto-generated catch block
 			ex.printStackTrace();
