@@ -83,7 +83,7 @@
             <input type="email" name="email" placeholder="Email" required />
             <input type="password" name="password" placeholder="Password" required />
             <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
-            <input type="number" name=phoneNumber" placeholder = "Phone Number" required/>
+            <input type="number" name="phoneNumber" placeholder = "Phone Number" required/>
             <input type="date" name="dob" placeholder="Date" required/>
             <input type="text" name="address" placeholder="Address" required/>
             
