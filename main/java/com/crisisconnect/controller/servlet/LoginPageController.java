@@ -60,9 +60,6 @@ public class LoginPageController extends HttpServlet {
 					
 					userSession.setMaxInactiveInterval(30*60);
 					
-					System.out.println(request.getSession().getAttribute("username"));
-					System.out.println(request.getSession().getAttribute("usertype"));
-					
 					response.sendRedirect(request.getContextPath() + "/home");
 			 }
 			

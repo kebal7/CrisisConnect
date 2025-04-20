@@ -63,9 +63,12 @@ public class RegisterPageController extends HttpServlet {
     		try {
     			int result = registrationService.registerUser(user);
     			
+    			System.out.print(result);
+    			
     			if(result == 0) {
     				System.out.print("Registration Failed");			
-    			}else {
+    			}
+    			else {
     				response.sendRedirect(request.getContextPath() + "/login");
     			}
     			

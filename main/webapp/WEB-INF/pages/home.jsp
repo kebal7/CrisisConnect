@@ -139,7 +139,7 @@
     <h1>CrisisConnect</h1>
     <div>
         <span class="welcome">Welcome, <strong><%=username%></strong> (<%=usertype  %>)</span>
-        <a href="logout.jsp" class="logout">Logout</a>
+        <a href="logout" class="logout">Logout</a>
     </div>
 </div>
 

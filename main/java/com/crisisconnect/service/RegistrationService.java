@@ -22,7 +22,7 @@ public class RegistrationService {
 	}
 	
 	public int registerUser(UserModel user) throws ClassNotFoundException {
-
+		
 		try {
 			
 			String query_register_user = "INSERT INTO users("
