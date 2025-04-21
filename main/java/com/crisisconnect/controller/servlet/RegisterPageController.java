@@ -40,8 +40,7 @@ public class RegisterPageController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(registrationService.getDbConn() == null) {
-			System.out.println("Sorry Database Connection Failed");
-			return;
+			handleError("Couldn't Connect to Database, Please Try Again Later", request, response);
 		}
 		
 		String userName = request.getParameter("username");
@@ -59,30 +58,37 @@ public class RegisterPageController extends HttpServlet {
         int isUniqueUsername = registrationService.isUniqueUsername(userName);
         
         if(isUniqueUsername == -1) {
-        	System.out.println("Sorry Internal Error Occured Please Try Again Later");
+        	handleError("Sorry Internal Error Occured Please Try Again Later", request, response);
         }else if(isUniqueUsername == 0) {
-        	System.out.println("Sorry Username already taken");
-        	response.sendRedirect(request.getContextPath() + "/register");
+        	handleError("Sorry Username already taken", request, response);
         }else {
     		// Call RegistrationService to register the student
     		try {
     			int result = registrationService.registerUser(user);
     			
-    			System.out.print(result);
-    			
-    			if(result == 0) {
-    				System.out.print("Registration Failed");			
+    			if(result == -1) {
+    				handleError("Sorry Internal Error Occured Please Try Again Later", request, response);
+    			}
+    			else if(result == 0) {
+    				handleError("Registration Failed", request, response);			
     			}
     			else {
+    				request.setAttribute("registration_error", null);
     				response.sendRedirect(request.getContextPath() + "/login");
     			}
     			
     		} catch (ClassNotFoundException e) {
-    			// TODO Auto-generated catch block
+    			handleError("Sorry Internal Error Occured Please Try Again Later", request, response);
     			e.printStackTrace();
     		}
         }
         
+	}
+	
+	private void handleError(String errorMessage, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("registration_error", errorMessage);
+		request.getRequestDispatcher("WEB-INF/pages/register.jsp").forward(request, response);
+		return;
 	}
 
 }
