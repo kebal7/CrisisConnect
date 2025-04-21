@@ -21,6 +21,13 @@ public class RegistrationService {
 		}
 	}
 	
+	
+	
+	public Connection getDbConn() {
+		return dbConn;
+	}
+
+
 	public int registerUser(UserModel user) throws ClassNotFoundException {
 		
 		try {

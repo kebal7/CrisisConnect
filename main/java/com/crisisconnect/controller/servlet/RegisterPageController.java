@@ -39,6 +39,11 @@ public class RegisterPageController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(registrationService.getDbConn() == null) {
+			System.out.println("Sorry Database Connection Failed");
+			return;
+		}
+		
 		String userName = request.getParameter("username");
 		String fullName = request.getParameter("fullName");
 		String email = request.getParameter("email");

@@ -61,6 +61,11 @@
     
 </head>
 <body>
+		<% if(request.getAttribute("login_error") != null){ %>
+			<p id="login_error" style="color: red; text-align:center;'"> 
+			<% request.getAttribute("login_error"); %></p>
+		<% } %>
+		
 	<div class="register-container">
         <h2>Create Account</h2>
         
