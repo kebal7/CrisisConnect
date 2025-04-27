@@ -28,17 +28,18 @@ public class HomePageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
+//		HttpSession session = request.getSession(false);
 		
-		if(session == null ){
-			response.sendRedirect(request.getContextPath() + "/login");
-		}else if(session.getAttribute("username") == null){
-			response.sendRedirect(request.getContextPath() + "/login");
-		}else if(session.getAttribute("username").equals("")) {
-			response.sendRedirect(request.getContextPath() + "/login");
-		}else {
-			request.getRequestDispatcher("WEB-INF/pages/home.jsp").forward(request, response);
-		}
+//		if(session == null ){
+//			response.sendRedirect(request.getContextPath() + "/login");
+//		}else if(session.getAttribute("username") == null){
+//			response.sendRedirect(request.getContextPath() + "/login");
+//		}else if(session.getAttribute("username").equals("")) {
+//			response.sendRedirect(request.getContextPath() + "/login");
+//		}else {
+//			request.getRequestDispatcher("WEB-INF/pages/home.jsp").forward(request, response);
+//		}
+		request.getRequestDispatcher("WEB-INF/pages/home.jsp").forward(request, response);
 	}
 
 	/**
