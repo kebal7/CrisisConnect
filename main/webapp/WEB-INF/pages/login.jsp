@@ -67,7 +67,7 @@
             <input type="password" name="password" placeholder="Password" required />
             <input type="submit" value="Login" />
         </form>
-        <a class="back-link" href="index.html">← Back to Home</a>
+        <a class="back-link" href="landingpage">← Back to Home</a>
     </div>
 </body>
 </html>

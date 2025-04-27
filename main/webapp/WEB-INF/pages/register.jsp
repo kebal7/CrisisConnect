@@ -102,7 +102,7 @@
             
             <input type="submit" value="Register" />
         </form>
-        <a class="back-link" href="index.html">← Back to Home</a>
+        <a class="back-link" href="ladingpage">← Back to Home</a>
     </div>
 </body>
 </html>
