@@ -138,7 +138,7 @@
 <div class="header">
     <h1>CrisisConnect</h1>
     <div>
-        <span class="welcome">Welcome, <strong><%=username%></strong> (<%=usertype  %>)</span>
+        <span class="welcome">Welcome, <strong><a href="profile"><%=username%></a></strong> (<%=usertype  %>)</span>
         <a href="logout" class="logout">Logout</a>
     </div>
 </div>
