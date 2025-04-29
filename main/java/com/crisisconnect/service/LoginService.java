@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import com.crisisconnect.config.DbConfig;
 import com.crisisconnect.model.LoginModel;
+import com.crisisconnect.util.PasswordUtil;
 
 public class LoginService {
 	private Connection dbConn;
@@ -33,7 +34,8 @@ public class LoginService {
 				String userDb = result.getString("username");
 				String passwordDb = result.getString("password");
 
-			
+				passwordDb = PasswordUtil.decrypt(passwordDb, userDb);
+				
 				if (userDb.equals(loginModel.getUsername()) && passwordDb.equals(loginModel.getPassword())) {
 					// Login successful, return 1
 					return 1;
