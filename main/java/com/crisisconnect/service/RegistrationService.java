@@ -96,4 +96,26 @@ public class RegistrationService {
 			return -1; //return -1 if internal error
 		}
 	}
+	
+	public int isUniqueEmail(String formEmail) {
+		String query_get_username = "SELECT username FROM users WHERE email = ?";
+		
+		try {
+			PreparedStatement stmt = dbConn.prepareStatement(query_get_username);
+			stmt.setString(1, formEmail);
+			
+			ResultSet result = stmt.executeQuery();
+			
+			if(result.next()) {
+				return 0; //return 0 email is matched
+			}else {
+				return 1; //return 1 is email is unmatched in database ==>> unique
+			}
+			
+		} catch (SQLException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+			return -1; //return -1 if internal error
+		}
+	}
 }
