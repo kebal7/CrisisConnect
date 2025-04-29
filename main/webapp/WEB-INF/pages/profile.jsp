@@ -67,6 +67,26 @@
         }
 
     </style>
+    
+<script>
+    function enableEdit() {
+        document.querySelectorAll(".editable").forEach(el => el.style.display = 'none');
+        document.querySelectorAll(".edit-input").forEach(el => el.style.display = 'inline-block');
+        document.getElementById("saveBtn").style.display = 'inline-block';
+        document.getElementById("cancelBtn").style.display = 'inline-block';
+        document.getElementById("editBtn").style.display = 'none';
+    }
+
+    function cancelEdit() {
+        document.querySelectorAll(".editable").forEach(el => el.style.display = 'inline');
+        document.querySelectorAll(".edit-input").forEach(el => el.style.display = 'none');
+        document.getElementById("saveBtn").style.display = 'none';
+        document.getElementById("cancelBtn").style.display = 'none';
+        document.getElementById("editBtn").style.display = 'inline-block';
+    }
+</script>
+    
+    
 </head>
 <body>
 <%
@@ -94,32 +114,43 @@
         <img src="<%=imagePath != null ? imagePath : "default-profile.png" %>" alt="Profile Picture">
     </div>
 
-    <div class="profile-info">
-    	<label>Username:</label>
-        <span><%=username%></span>
-        
-        <label>Full Name:</label>
-        <span><%=fullName%></span>
+	<form action="" method="post">
+	    <input type="hidden" name="username" value="<%=username%>">
+	    
+	    <div class="profile-info">
+	        <label>Full Name:</label>
+	        <span class="editable"><%=fullName%></span>
+	        <input class="edit-input" type="text" name="fullName" value="<%=fullName%>" style="display:none;" />
+	
+	        <label>Email:</label>
+	        <span class="editable"><%=email%></span>
+	        <input class="edit-input" type="email" name="email" value="<%=email%>" style="display:none;" />
+	
+	        <label>Password:</label>
+	        <span class="editable"><%=password%></span>
+	        <input class="edit-input" type="password" name="password" value="<%=password%>" style="display:none;" />
+	
+	        <label>Phone Number:</label>
+	        <span class="editable"><%=phoneNumber%></span>
+	        <input class="edit-input" type="text" name="phoneNumber" value="<%=phoneNumber%>" style="display:none;" />
+	
+	        <label>Date of Birth:</label>
+	        <span class="editable"><%=dateOfBirth%></span>
+	        <input class="edit-input" type="date" name="dateOfBirth" value="<%=dateOfBirth%>" style="display:none;" />
+	
+	        <label>Address:</label>
+	        <span class="editable"><%=address%></span>
+	        <input class="edit-input" type="text" name="address" value="<%=address%>" style="display:none;" />
+	    </div>
+	
+	    <br/>
+	    <div style="text-align:right;">
+	        <button type="button" id="editBtn" onclick="enableEdit()">Edit</button>
+	        <button type="submit" id="saveBtn" style="display:none;">Save Changes</button>
+	        <button type="button" id="cancelBtn" onclick="cancelEdit()" style="display:none;">Cancel</button>
+	    </div>
+	</form>
 
-        <label>User Type:</label>
-        <span><%=usertype%></span>
-
-        <label>Email:</label>
-        <span><%=email%></span>
-
-		<label>Password:</label>
-        <span><%=password%></span>
-        
-        <label>Phone Number:</label>
-        <span><%=phoneNumber%></span>
-
-        <label>Date of Birth:</label>
-        <span><%=dateOfBirth%></span>
-
-        <label>Address:</label>
-        <span><%=address%></span>
-
-    </div>
 </div>
 </body>
 </html>
