@@ -136,7 +136,7 @@
 	
 	        <label>Date of Birth:</label>
 	        <span class="editable"><%=dateOfBirth%></span>
-	        <input class="edit-input" type="date" name="dateOfBirth" value="<%=dateOfBirth%>" style="display:none;" />
+	        <input class="edit-input" type="date" name="dob" value="<%=dateOfBirth%>" style="display:none;" />
 	
 	        <label>Address:</label>
 	        <span class="editable"><%=address%></span>

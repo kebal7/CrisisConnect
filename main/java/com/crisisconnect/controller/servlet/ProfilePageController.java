@@ -10,6 +10,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 import com.crisisconnect.model.UserModel;
+import com.crisisconnect.service.ProfileUpdateService;
+import com.crisisconnect.service.RegistrationService;
 import com.crisisconnect.service.UserInfoService;
 import com.crisisconnect.util.PasswordUtil;
 
@@ -20,12 +22,14 @@ import com.crisisconnect.util.PasswordUtil;
 public class ProfilePageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private final ProfileUpdateService profileUpdateService;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ProfilePageController() {
         super();
-        // TODO Auto-generated constructor stub
+        this.profileUpdateService = new ProfileUpdateService();
     }
 
 	/**
@@ -68,7 +72,34 @@ public class ProfilePageController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+    	HttpSession userSession = request.getSession();
+		String sessionUsername = (String) userSession.getAttribute("username");
+		String userType = (String) userSession.getAttribute("usertype");
+
+		String userName = sessionUsername;
+		String fullName = request.getParameter("fullName");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String phoneNumber = request.getParameter("phoneNumber");
+		String dob = request.getParameter("dob");
+		String address = request.getParameter("address");
+		String imagePath = "null";
+		
+		UserModel user = new UserModel(userName, fullName, userType, password, email, phoneNumber, dob, address, imagePath);
+		
+		user.setPassword(PasswordUtil.encrypt((user.getUsername()), user.getPassword()));
+		
+		try {
+			int result = profileUpdateService.updateUser(user, sessionUsername);
+			
+			if(result == 1) {
+				response.sendRedirect(request.getContextPath() + "/profile");
+			}
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
