@@ -58,13 +58,16 @@ public class RegisterPageController extends HttpServlet {
         
         int isUniqueUsername = registrationService.isUniqueUsername(userName);
         int isUniqueEmail = registrationService.isUniqueEmail(email);
+        int isUniquePhoneNo = registrationService.isUniquePhoneNo(phoneNumber);
         
-        if(isUniqueUsername == -1 || isUniqueEmail == -1) {
+        if(isUniqueUsername == -1 || isUniqueEmail == -1 || isUniquePhoneNo == -1) {
         	handleError("Sorry Internal Error Occured Please Try Again Later", request, response);
         }else if(isUniqueUsername == 0) {
         	handleError("Sorry Username already taken", request, response);
         }else if(isUniqueEmail == 0) {
         	handleError("Email is already in used by another account", request, response);
+        } else if(isUniquePhoneNo == 0){
+        	handleError("Phone No. is already in used by another account", request, response);
         }else {
     		// Call RegistrationService to register the student
     		try {
