@@ -2,6 +2,7 @@ package com.crisisconnect.controller.servlet;
 
 import com.crisisconnect.model.UserModel;
 import com.crisisconnect.service.RegistrationService;
+import com.crisisconnect.util.PasswordUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -64,6 +65,7 @@ public class RegisterPageController extends HttpServlet {
         }else {
     		// Call RegistrationService to register the student
     		try {
+    			user.setPassword(PasswordUtil.encrypt((user.getUsername()), user.getPassword()));
     			int result = registrationService.registerUser(user);
     			
     			if(result == -1) {
