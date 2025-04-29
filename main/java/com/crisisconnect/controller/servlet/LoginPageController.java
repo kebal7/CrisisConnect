@@ -42,6 +42,11 @@ public class LoginPageController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		if(loginService.getDbConn() == null) {
+			handleError("Couldn't Connect to Database, Please Try Again Later", request, response);
+		}
+		
 		String formUserName = request.getParameter("username");
 		String formPassword = request.getParameter("password");
 		
@@ -50,7 +55,13 @@ public class LoginPageController extends HttpServlet {
 		try {
 			int loginResult = loginService.getUserLoginInfo(loginModel);
 			
-			 if (loginResult == 1) {
+			if(loginResult == -2) {
+				handleError("Sorry Internal Error Occured Please Try Again Later", request, response);
+			}else if(loginResult == -1) {
+				handleError("Invalid Username", request, response);
+			}else if(loginResult == 0) {
+				handleError("Invalid username or password", request, response);
+			}else{
 		            // Login successful
 				 	String userType = loginService.getUserRole(loginModel);
 				 	
@@ -64,9 +75,16 @@ public class LoginPageController extends HttpServlet {
 			 }
 			
 		} catch (ClassNotFoundException e) {
+			handleError("Sorry Internal Error Occured Please Try Again Later", request, response);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private void handleError(String errorMessage, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("login_error", errorMessage);
+		request.getRequestDispatcher("WEB-INF/pages/login.jsp").forward(request, response);
+		return;
 	}
 
 }

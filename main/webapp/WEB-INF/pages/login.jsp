@@ -62,6 +62,13 @@
 <body>
 	    <div class="login-container">
         <h2>Login</h2>
+        
+        <% if(request.getAttribute("login_error") != null) { %>
+		    <p style="color: red; text-align: center;">
+		        <%= request.getAttribute("login_error") %>
+		    </p>
+		<% } %>
+		
         <form action="" method="post">
             <input type="text" name="username" placeholder="Username" required />
             <input type="password" name="password" placeholder="Password" required />

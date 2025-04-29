@@ -76,4 +76,16 @@ public class LoginService {
 		return null;
 	}
 
+	public Connection getDbConn() {
+		if(dbConn == null) {
+			try {
+				this.dbConn = DbConfig.getDbConnection();
+			}catch(SQLException | ClassNotFoundException ex) {
+				System.err.println("Database connection error:"+ ex.getMessage());
+				ex.printStackTrace();
+			}
+		}
+		return dbConn;
+	}
+
 }
