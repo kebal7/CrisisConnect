@@ -127,7 +127,7 @@
 	        <input class="edit-input" type="email" name="email" value="<%=email%>" style="display:none;" />
 	
 	        <label>Password:</label>
-	        <span class="editable"><%=password%></span>
+	        <span class="editable">*********</span>
 	        <input class="edit-input" type="password" name="password" value="<%=password%>" style="display:none;" />
 	
 	        <label>Phone Number:</label>
