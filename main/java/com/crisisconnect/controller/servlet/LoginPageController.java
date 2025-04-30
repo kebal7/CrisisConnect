@@ -2,6 +2,7 @@ package com.crisisconnect.controller.servlet;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -70,6 +71,10 @@ public class LoginPageController extends HttpServlet {
 					userSession.setAttribute("usertype", userType);
 					
 					userSession.setMaxInactiveInterval(30*60);
+					
+					Cookie userCookie= new Cookie("username", formUserName);
+					userCookie.setMaxAge(30*60);
+					response.addCookie(userCookie);
 					
 					response.sendRedirect(request.getContextPath() + "/home");
 			 }
