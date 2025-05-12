@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class AdminPanelController
  */
-@WebServlet("/adddisaster")
+@WebServlet("/admin/adddisaster")
 public class AddDisasterPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,7 +26,7 @@ public class AddDisasterPageController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("WEB-INF/pages/addDisaster.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/addDisaster.jsp").forward(request, response);
 	}
 
 	/**

@@ -53,7 +53,9 @@ public class AuthenticationFilter implements Filter {
 		HttpSession session = ((HttpServletRequest) request).getSession(false);
 		// Get the session and check if user is logged in
 		boolean isLoggedIn = (session != null && session.getAttribute("username") != null);;
-
+		
+		System.out.println(uri);
+		
 		if (!isLoggedIn) {
 			if (uri.endsWith(LOGIN) || uri.endsWith(REGISTER) || uri.endsWith(ROOT) || uri.endsWith(LANDINGPAGE)) {
 				chain.doFilter(request, response);

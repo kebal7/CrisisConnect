@@ -65,7 +65,7 @@ public class ProfilePageController extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		request.getRequestDispatcher("WEB-INF/pages/profile.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/profile.jsp").forward(request, response);
 	}
 
 	/**
