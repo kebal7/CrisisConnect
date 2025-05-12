@@ -64,7 +64,7 @@ public class AuthenticationFilter implements Filter {
 			if (uri.endsWith(LOGIN) || uri.endsWith(REGISTER)) {
 				res.sendRedirect(req.getContextPath() + HOME);
 			} else {
-				if(uri.endsWith("/adminpanel")) {
+				if(uri.endsWith("/admin")) {
 					if(session.getAttribute("usertype").equals("admin")) {
 						chain.doFilter(request, response);
 					}
