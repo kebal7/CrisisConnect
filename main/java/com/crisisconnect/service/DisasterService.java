@@ -140,5 +140,46 @@ public class DisasterService {
 		}
 		
 	}
+
+	public DisasterModel getDisaster(int disasterId) {
+		String retriever_disaster_query = "SELECT * FROM disasterrecord WHERE disasterId= ?";
+		
+		try {
+			PreparedStatement stmt = dbConn.prepareStatement(retriever_disaster_query);
+			
+			stmt.setInt(1, disasterId);
+			
+			ResultSet result = stmt.executeQuery();
+			
+			if(result.next()) {
+				int id = result.getInt("disasterId");
+				String title = result.getString("disasterTitle");
+				String type = result.getString("disasterType");
+				String municipality = result.getString("municipalityOrVdc");
+				int ward = Integer.parseInt(result.getString("ward"));
+				String coordinates = result.getString("longitudeLatitude");
+				LocalDate date = result.getDate("dateOfIncident").toLocalDate();
+				String reporter = result.getString("reportedBy");
+				String coordinator = result.getString("assignedCoordinator");
+				int injuries = result.getInt("noOfInjuries");
+				int deaths = result.getInt("noOfDeath");
+				int missing = result.getInt("noOfMissing");
+				double loss = result.getDouble("estimatedLoss");
+				String notes = result.getString("otherNotes");
+
+            	DisasterModel disaster = new DisasterModel(id, title, type, municipality, ward, coordinates,
+                        date, reporter, coordinator, injuries, deaths,
+                        missing, loss, notes);
+            	return disaster;
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 	
 }

@@ -51,10 +51,10 @@ public class ManageDisasterRecordController extends HttpServlet {
 		
 		if(action.equals("delete")) {
 			int result = disasterService.deleteDisasterRecord(disasterId);
+			doGet(request, response);
+		}else if(action.equals("edit")) {
+			 response.sendRedirect(request.getContextPath() + "/updatedisaster?id=" + disasterId);
 		}
-		
-		
-		doGet(request, response);
 	}
 
 }
