@@ -46,7 +46,14 @@ public class ManageDisasterRecordController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String action = request.getParameter("action");
+		int disasterId = Integer.parseInt(request.getParameter("id"));
+		
+		if(action.equals("delete")) {
+			int result = disasterService.deleteDisasterRecord(disasterId);
+		}
+		
+		
 		doGet(request, response);
 	}
 

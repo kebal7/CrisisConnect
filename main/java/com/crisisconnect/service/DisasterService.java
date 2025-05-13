@@ -116,5 +116,29 @@ public class DisasterService {
 		return disasters;
 	}
 	
+	public int deleteDisasterRecord(int disasterId) {
+		String delete_disaster_query = "DELETE FROM	disasterrecord WHERE disasterId=?";
+		
+		try {
+			PreparedStatement stmt = dbConn.prepareStatement(delete_disaster_query);
+			stmt.setInt(1, disasterId);
+			
+			int result = stmt.executeUpdate();
+			
+			// Check if the delete was successful (i.e., at least one row affected)
+			if (result > 0) {
+				return 1; // delete disaster successful
+			} else {
+				return 0; // delete failed (no rows affected)
+			
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1; // Internal error
+		}
+		
+	}
 	
 }

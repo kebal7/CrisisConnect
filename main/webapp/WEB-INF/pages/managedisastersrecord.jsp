@@ -142,13 +142,11 @@
                         <td><%= d.getOtherNotes() %></td>
                         
                         <td>
-	                        <form action="editDisaster" method="get" style="display:inline;">
+	                        <form action="" method="post" style="display:inline;">
 	                            <input type="hidden" name="id" value="<%= d.getDisasterId() %>">
-	                            <button class="btn edit-btn">Edit</button>
-	                        </form>
-	                        <form action="deleteDisaster" method="post" style="display:inline;" onsubmit="return confirm('Are you sure?');">
-	                            <input type="hidden" name="id" value="<%= d.getDisasterId() %>">
-	                            <button class="btn delete-btn">Delete</button>
+	                            
+	                            <button class="btn edit-btn" name="action" value="edit">Edit</button>
+	                            <button class="btn delete-btn" name="action" value="delete" onclick="return confirm('Are you sure?');">Delete</button>
 	                        </form>
 	                    </td>
                     </tr>
