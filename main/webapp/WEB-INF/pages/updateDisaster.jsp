@@ -81,7 +81,7 @@
 	    
 	    	<div class="form-group">
 	            <label for="disasterTitle">Disaster Id</label>
-	            <input type="text" id="disasterId" name="disasterId" value="<%=disasterId%>" required disabled>
+	            <input type="text" id="disasterId" name="disasterId" value="<%=disasterId%>" required>
 	        </div>
 	        
 	        <div class="form-group">

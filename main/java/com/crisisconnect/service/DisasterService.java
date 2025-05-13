@@ -181,5 +181,48 @@ public class DisasterService {
 		
 		return null;
 	}
+
+	public int updateDisaster(DisasterModel formDisaster) {
+		String update_disaster_query = "UPDATE disasterrecord SET disasterTitle = ?, disasterType = ?, municipalityOrVdc = ?, "
+			    + "ward = ?, longitudeLatitude = ?, dateOfIncident = ?, reportedBy = ?, assignedCoordinator = ?, "
+			    + "noOfInjuries = ?, noOfDeath = ?, noOfMissing = ?, estimatedLoss = ?, otherNotes = ? "
+			    + "WHERE disasterId = ?";
+		
+		
+		try {
+			PreparedStatement stmt = dbConn.prepareStatement(update_disaster_query);
+			
+			stmt.setString(1, formDisaster.getDisasterTitle());
+			stmt.setString(2, formDisaster.getDisasterType());
+			stmt.setString(3, formDisaster.getMunicipalityOrVdc());
+			stmt.setString(4, String.valueOf(formDisaster.getWard()));
+			stmt.setString(5, formDisaster.getLongitudeLatitude());
+			stmt.setDate(6, java.sql.Date.valueOf(formDisaster.getDateOfIncident()));
+			stmt.setString(7, formDisaster.getReportedBy());
+			stmt.setString(8, formDisaster.getAssignedCoordinator());
+			stmt.setInt(9, formDisaster.getNoOfInjuries());
+			stmt.setInt(10, formDisaster.getNoOfDeath());
+			stmt.setInt(11, formDisaster.getNoOfMissing());
+			stmt.setDouble(12, formDisaster.getEstimatedLoss());
+			stmt.setString(13, formDisaster.getOtherNotes());
+			stmt.setString(14, String.valueOf(formDisaster.getDisasterId()));
+			
+			// Execute the update statement and store the number of affected rows
+			int result = stmt.executeUpdate();
+
+			// Check if the update was successful (i.e., at least one row affected)
+			if (result > 0) {
+				return 1; // updating disaster successful successful
+			} else {
+				return 0; // updating failed (no rows affected)
+			
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return -1; // Internal error
+		}
+	}
 	
 }
