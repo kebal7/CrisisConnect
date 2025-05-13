@@ -34,7 +34,7 @@ public class AddDisasterPageController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String disasterTitle = request.getParameter("disasterTitle");
-        System.out.println("Disaster Name: " + disasterTitle);
+ 
 		doGet(request, response);
 	}
 

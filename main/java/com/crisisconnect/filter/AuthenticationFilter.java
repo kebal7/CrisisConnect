@@ -52,35 +52,44 @@ public class AuthenticationFilter implements Filter {
 //		
 		HttpSession session = ((HttpServletRequest) request).getSession(false);
 		// Get the session and check if user is logged in
-		boolean isLoggedIn = (session != null && session.getAttribute("username") != null);;
+		boolean isLoggedIn = (session != null && session.getAttribute("username") != null);
 		
-		System.out.println(uri);
-		
+		// if user is not logged in and attempts to go to login/register/root/landing pages allow
+		// disallow every other pages for if not logged in
 		if (!isLoggedIn) {
 			if (uri.endsWith(LOGIN) || uri.endsWith(REGISTER) || uri.endsWith(ROOT) || uri.endsWith(LANDINGPAGE)) {
 				chain.doFilter(request, response);
 			} else {
 				res.sendRedirect(req.getContextPath() + LOGIN);
 			}
+			return;
 		} else {
-			if (uri.endsWith(LOGIN) || uri.endsWith(REGISTER)) {
+			// if user is logged in and attempts to go to login/register/root/landing pages redirect to home
+			if (uri.endsWith(LOGIN) || uri.endsWith(REGISTER) || uri.endsWith(ROOT) ||  uri.endsWith(LANDINGPAGE)) {
 				res.sendRedirect(req.getContextPath() + HOME);
-			} else {
-				if(uri.endsWith("/admin")) {
-					if(session.getAttribute("usertype").equals("admin")) {
-						chain.doFilter(request, response);
-					}
-					else {
-						res.sendRedirect(req.getContextPath() + HOME);
-					}
-				}
-				else {
-					chain.doFilter(request, response);
-				}
-				//chain.doFilter(request, response);
+				return;
 			}
-			
+		}	
+		
+		// assumes all request are from logged in user as they are previously handled
+		
+		//restrict admin and user to role based page
+		if(uri.contains("/admin")) {
+			if(!session.getAttribute("usertype").equals("admin")) {
+				res.sendRedirect(req.getContextPath() + HOME);
+				return;
+			}
 		}
+		
+		if(uri.contains("/user")) {
+			if(!session.getAttribute("usertype").equals("user")) {
+				res.sendRedirect(req.getContextPath() + HOME);
+				return;
+			}
+		}
+		
+		// All checks passed — continue request
+		chain.doFilter(request, response);
 	}
 
 	@Override

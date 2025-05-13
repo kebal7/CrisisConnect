@@ -58,95 +58,96 @@
 </head>
 <body>
 	<div class="form-container">
-    <h2>Report New Disaster</h2>
-    <form action="addDisaster" method="post">
-        <div class="form-group">
-            <label for="disasterId">Disaster ID *</label>
-            <input type="number" id="disasterId" name="disasterId" required>
-        </div>
-
-        <div class="form-group">
-            <label for="disasterTitle">Disaster Title *</label>
-            <input type="text" id="disasterTitle" name="disasterTitle" required>
-        </div>
-
-        <div class="form-group">
-            <label for="disasterType">Disaster Type</label>
-            <select id="disasterType" name="disasterType">
-                <option value="">-- Select Type --</option>
-                <option value="Flood">Flood</option>
-                <option value="Landslide">Landslide</option>
-                <option value="Earthquake">Earthquake</option>
-                <option value="Fire">Fire</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="municipalityOrVdc">Municipality/VDC</label>
-            <select id="municipalityOrVdc" name="municipalityOrVdc">
-                <option value="">-- Select Municipality --</option>
-                <option value="Kathmandu">Kathmandu</option>
-                <option value="Lalitpur">Lalitpur</option>
-                <option value="Pokhara">Pokhara</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="ward">Ward No</label>
-            <select id="ward" name="ward">
-                <option value="">-- Select Ward --</option>
-                <% for (int i = 1; i <= 35; i++) { %>
-                    <option value="<%= i %>"><%= i %></option>
-                <% } %>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="longitudeLatitude">Longitude, Latitude</label>
-            <input type="text" id="longitudeLatitude" name="longitudeLatitude">
-        </div>
-
-        <div class="form-group">
-            <label for="dateOfIncident">Date of Incident *</label>
-            <input type="date" id="dateOfIncident" name="dateOfIncident" required>
-        </div>
-
-        <div class="form-group">
-            <label for="reportedBy">Reported By</label>
-            <input type="text" id="reportedBy" name="reportedBy">
-        </div>
-
-        <div class="form-group">
-            <label for="assignedCoordinator">Assigned Coordinator</label>
-            <input type="text" id="assignedCoordinator" name="assignedCoordinator">
-        </div>
-
-        <div class="form-group">
-            <label for="noOfInjuries">No. of Injuries</label>
-            <input type="number" id="noOfInjuries" name="noOfInjuries">
-        </div>
-
-        <div class="form-group">
-            <label for="noOfDeath">No. of Deaths</label>
-            <input type="number" id="noOfDeath" name="noOfDeath">
-        </div>
-
-        <div class="form-group">
-            <label for="noOfMissing">No. of Missing</label>
-            <input type="number" id="noOfMissing" name="noOfMissing">
-        </div>
-
-        <div class="form-group">
-            <label for="estimatedLoss">Estimated Loss (NPR)</label>
-            <input type="number" step="0.01" id="estimatedLoss" name="estimatedLoss">
-        </div>
-
-        <div class="form-group">
-            <label for="otherNotes">Other Notes</label>
-            <textarea id="otherNotes" name="otherNotes" rows="4"></textarea>
-        </div>
-
-        <button type="submit">Submit Disaster Report</button>
-    </form>
+	    <h2>Report New Disaster</h2>
+	    <form action="" method="post">
+	        <div class="form-group">
+	            <label for="disasterId">Disaster ID *</label>
+	            <input type="number" id="disasterId" name="disasterId" required>
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="disasterTitle">Disaster Title *</label>
+	            <input type="text" id="disasterTitle" name="disasterTitle" required>
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="disasterType">Disaster Type</label>
+	            <select id="disasterType" name="disasterType">
+	                <option value="">-- Select Type --</option>
+	                <option value="Flood">Flood</option>
+	                <option value="Landslide">Landslide</option>
+	                <option value="Earthquake">Earthquake</option>
+	                <option value="Fire">Fire</option>
+	            </select>
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="municipalityOrVdc">Municipality/VDC</label>
+	            <select id="municipalityOrVdc" name="municipalityOrVdc">
+	                <option value="">-- Select Municipality --</option>
+	                <option value="Kathmandu">Kathmandu</option>
+	                <option value="Lalitpur">Lalitpur</option>
+	                <option value="Pokhara">Pokhara</option>
+	            </select>
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="ward">Ward No</label>
+	            <select id="ward" name="ward">
+	                <option value="">-- Select Ward --</option>
+	                <% for (int i = 1; i <= 35; i++) { %>
+	                    <option value="<%= i %>"><%= i %></option>
+	                <% } %>
+	            </select>
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="longitudeLatitude">Longitude, Latitude</label>
+	            <input type="text" id="longitudeLatitude" name="longitudeLatitude">
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="dateOfIncident">Date of Incident *</label>
+	            <input type="date" id="dateOfIncident" name="dateOfIncident" required>
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="reportedBy">Reported By</label>
+	            <input type="text" id="reportedBy" name="reportedBy">
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="assignedCoordinator">Assigned Coordinator</label>
+	            <input type="text" id="assignedCoordinator" name="assignedCoordinator">
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="noOfInjuries">No. of Injuries</label>
+	            <input type="number" id="noOfInjuries" name="noOfInjuries">
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="noOfDeath">No. of Deaths</label>
+	            <input type="number" id="noOfDeath" name="noOfDeath">
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="noOfMissing">No. of Missing</label>
+	            <input type="number" id="noOfMissing" name="noOfMissing">
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="estimatedLoss">Estimated Loss (NPR)</label>
+	            <input type="number" step="0.01" id="estimatedLoss" name="estimatedLoss">
+	        </div>
+	
+	        <div class="form-group">
+	            <label for="otherNotes">Other Notes</label>
+	            <textarea id="otherNotes" name="otherNotes" rows="4"></textarea>
+	        </div>
+	
+	        <button type="submit">Submit Disaster Report</button>
+	    </form>
+    </div>
 </body>
 </html>
