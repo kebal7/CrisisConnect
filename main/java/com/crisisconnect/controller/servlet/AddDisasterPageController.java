@@ -5,10 +5,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
 import com.crisisconnect.model.DisasterModel;
+import com.crisisconnect.service.DisasterService;
+import com.crisisconnect.service.RegistrationService;
 
 /**
  * Servlet implementation class AdminPanelController
@@ -17,12 +21,14 @@ import com.crisisconnect.model.DisasterModel;
 public class AddDisasterPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private final DisasterService disasterService;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AddDisasterPageController() {
         super();
-        // TODO Auto-generated constructor stub
+        this.disasterService = new DisasterService();
     }
 
 	/**
@@ -36,6 +42,9 @@ public class AddDisasterPageController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession userSession = request.getSession();
+		String sessionUser = (String) userSession.getAttribute("username");
+		
 		String disasterIdStr = "1";
 		String disasterTitle = request.getParameter("disasterTitle");
 		String disasterType = request.getParameter("disasterType");
@@ -43,7 +52,7 @@ public class AddDisasterPageController extends HttpServlet {
 		String wardStr = request.getParameter("ward");
 		String longitudeLatitude = request.getParameter("longitudeLatitude");
 		String dateOfIncidentStr = request.getParameter("dateOfIncident");
-		String reportedBy = request.getParameter("reportedBy");
+		String reportedBy = sessionUser;
 		String assignedCoordinator = request.getParameter("assignedCoordinator");
 		String noOfInjuriesStr = request.getParameter("noOfInjuries");
 		String noOfDeathStr = request.getParameter("noOfDeath");
@@ -76,7 +85,8 @@ public class AddDisasterPageController extends HttpServlet {
 			    estimatedLoss,
 			    otherNotes
 			);
-
+		
+		disasterService.addDisaster(formDisaster);
  
 		doGet(request, response);
 	}

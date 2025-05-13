@@ -107,11 +107,6 @@
 	        </div>
 	
 	        <div class="form-group">
-	            <label for="reportedBy">Reported By</label>
-	            <input type="text" id="reportedBy" name="reportedBy">
-	        </div>
-	
-	        <div class="form-group">
 	            <label for="assignedCoordinator">Assigned Coordinator</label>
 	            <input type="text" id="assignedCoordinator" name="assignedCoordinator">
 	        </div>
