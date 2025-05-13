@@ -113,7 +113,6 @@ public class DisasterService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return disasters;
 	}
 	
