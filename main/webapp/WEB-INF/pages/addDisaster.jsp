@@ -61,11 +61,6 @@
 	    <h2>Report New Disaster</h2>
 	    <form action="" method="post">
 	        <div class="form-group">
-	            <label for="disasterId">Disaster ID *</label>
-	            <input type="number" id="disasterId" name="disasterId" required>
-	        </div>
-	
-	        <div class="form-group">
 	            <label for="disasterTitle">Disaster Title *</label>
 	            <input type="text" id="disasterTitle" name="disasterTitle" required>
 	        </div>
