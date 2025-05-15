@@ -143,7 +143,6 @@ public class DisasterService {
 
 	public DisasterModel getDisaster(int disasterId) {
 		String retriever_disaster_query = "SELECT * FROM disasterrecord WHERE disasterId= ?";
-		
 		try {
 			PreparedStatement stmt = dbConn.prepareStatement(retriever_disaster_query);
 			
@@ -171,14 +170,11 @@ public class DisasterService {
                         date, reporter, coordinator, injuries, deaths,
                         missing, loss, notes);
             	return disaster;
-			}
-			
-			
+			}	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 

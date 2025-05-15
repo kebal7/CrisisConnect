@@ -93,18 +93,10 @@ public class UpdateDisasterPageController extends HttpServlet {
 		double estimatedLoss = Double.parseDouble(estimatedLossStr);
 		
 		DisasterModel formDisaster = new DisasterModel(
-			    disasterId,
-			    disasterTitle,
-			    disasterType,
-			    municipalityOrVdc,
-			    ward,
-			    longitudeLatitude,
-			    dateOfIncident,
-			    reportedBy,
-			    assignedCoordinator,
-			    noOfInjuries,
-			    noOfDeath,
-			    noOfMissing,
+			    disasterId, disasterTitle, disasterType,
+			    municipalityOrVdc, ward,longitudeLatitude,dateOfIncident,
+			    reportedBy,assignedCoordinator,
+			    noOfInjuries,noOfDeath,noOfMissing,
 			    estimatedLoss,
 			    otherNotes
 			);
