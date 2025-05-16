@@ -11,7 +11,6 @@
        body {
             font-family: "Segoe UI", sans-serif;
             background: #f9f9f9;
-            padding: 30px;
         }
         .form-container {
             max-width: 800px;
@@ -57,7 +56,8 @@
 
 </head>
 <body>
-
+	<jsp:include page="nav.jsp"/>
+	
 	<%
 	    int disasterId = (Integer) request.getAttribute("disasterId");
 	    String disasterTitle = (String) request.getAttribute("disasterTitle");

@@ -15,24 +15,8 @@
             background: #f2f6fc;
         }
 
-        .header {
-            background: #007BFF;
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header h1 {
-            margin: 0;
-        }
-
-        .welcome {
-            font-size: 18px;
-        }
         
-               .container {
+		.container {
             padding: 30px;
         }
 
@@ -89,10 +73,9 @@
 </style>
 </head>
 <body>
+	<jsp:include page="nav.jsp"/>
+
 	<%
-	    String username = (String) session.getAttribute("username");
-	    String  usertype= (String) session.getAttribute("usertype");
-	    
 	    List<DisasterModel> disasterList = (List<DisasterModel>) request.getAttribute("disasters"); 
 	%>
 

@@ -11,23 +11,6 @@
             background: #f2f6fc;
         }
 
-        .header {
-            background: #007BFF;
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header h1 {
-            margin: 0;
-        }
-
-        .welcome {
-            font-size: 18px;
-        }
-
         .container {
             max-width: 800px;
             margin: 40px auto;
@@ -101,13 +84,7 @@
     String imagePath = (String) request.getAttribute("imagePath");
 %>
 
-<div class="header">
-    <h1>CrisisConnect</h1>
-    <div>
-        <span class="welcome">Welcome, <strong><a href="profile"><%=username%></a></strong> (<%=usertype  %>)</span>
-        <a href="logout" class="logout" style="color:white; margin-left:20px; text-decoration:underline;">Logout</a>
-    </div>
-</div>
+<jsp:include page="nav.jsp"/>
 
 <div class="container">
     <div class="profile-pic">
