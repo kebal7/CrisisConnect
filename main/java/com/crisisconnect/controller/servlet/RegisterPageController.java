@@ -43,7 +43,6 @@ public class RegisterPageController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(registrationService.getDbConn() == null) {
 			handleError("Couldn't Connect to Database, Please Try Again Later", request, response);
-			return;
 		}
 		
 		String userName = request.getParameter("username");
@@ -60,53 +59,43 @@ public class RegisterPageController extends HttpServlet {
 		// 🛡️ FIELD VALIDATIONS
 		if (userName == null || !ValidationUtil.isAlphanumeric(userName)) {
 			handleError("Username must be alphanumeric and cannot be empty.", request, response);
-			return;
 		}
 
 		if (fullName == null || !ValidationUtil.isTextOnly(fullName)) {
 			handleError("Full Name must contain only letters and spaces.", request, response);
-			return;
 		}
 
 		if (email == null || !ValidationUtil.isEmail(email)) {
 			handleError("Please enter a valid email address.", request, response);
-			return;
 		}
 		
 		if(password == null || confirmPassword == null) {
 			handleError("Please enter valid password", request, response);
-			return;
 		}
 		
 		if (!ValidationUtil.doPasswordsMatch(password, confirmPassword)) {
 			handleError("Passwords do not match.", request, response);
-			return;
 		}
 		
 		if (password == null || !ValidationUtil.isValidPassword(password)) {
 			handleError("Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.", request, response);
-			return;
 		}
 		
 		
 		if (phoneNumber == null || !ValidationUtil.isValidPhoneNumber(phoneNumber)) {
 			handleError("Phone number must start with 97 or 98 and be 10 digits long.", request, response);
-			return;
 		}
 
 		if (dob == null || dob.trim().isEmpty()) {
 			handleError("Date of Birth cannot be empty.", request, response);
-			return;
 		}
 
 		if (address == null || address.trim().isEmpty() || !ValidationUtil.hasNoSpecialCharacters(address)) {
 			handleError("Address cannot be empty and must not contain special characters.", request, response);
-			return;
 		}
 
 		if (userType == null || (!userType.equalsIgnoreCase("admin") && !userType.equalsIgnoreCase("user"))) {
 			handleError("Invalid user type selected.", request, response);
-			return;
 		}
 		
         UserModel user = new UserModel(userName, fullName, userType, password, email, phoneNumber, dob, address, imagePath);
@@ -133,7 +122,7 @@ public class RegisterPageController extends HttpServlet {
     				handleError("Sorry Internal Error Occured Please Try Again Later", request, response);
     			}
     			else if(result == 0) {
-    				handleError("Registration Failed", request, response);			
+    				handleError("Registration Failed Due to Unexpected Internal Error", request, response);			
     			}
     			else {
     				request.setAttribute("registration_error", null);
