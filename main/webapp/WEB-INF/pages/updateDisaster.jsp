@@ -58,30 +58,37 @@
 <body>
 	<jsp:include page="nav.jsp"/>
 	
-	<%
-	    int disasterId = (Integer) request.getAttribute("disasterId");
-	    String disasterTitle = (String) request.getAttribute("disasterTitle");
-	    String disasterType = (String) request.getAttribute("disasterType");
-	    String municipalityOrVdc = (String) request.getAttribute("municipalityOrVdc");
-	    int ward = (Integer) request.getAttribute("ward");
-	    String longitudeLatitude = (String) request.getAttribute("longitudeLatitude");
-	    java.time.LocalDate dateOfIncident = (java.time.LocalDate) request.getAttribute("dateOfIncident");
-	    String reportedBy = (String) request.getAttribute("reportedBy");
-	    String assignedCoordinator = (String) request.getAttribute("assignedCoordinator");
-	    int noOfInjuries = (Integer) request.getAttribute("noOfInjuries");
-	    int noOfDeath = (Integer) request.getAttribute("noOfDeath");
-	    int noOfMissing = (Integer) request.getAttribute("noOfMissing");
-	    double estimatedLoss = (Double) request.getAttribute("estimatedLoss");
-	    String otherNotes = (String) request.getAttribute("otherNotes");
-	%>
+<%
+    int disasterId = request.getAttribute("disasterId") != null ? (Integer) request.getAttribute("disasterId") : 0;
+    String disasterTitle = request.getAttribute("disasterTitle") != null ? (String) request.getAttribute("disasterTitle") : "";
+    String disasterType = request.getAttribute("disasterType") != null ? (String) request.getAttribute("disasterType") : "";
+    String municipalityOrVdc = request.getAttribute("municipalityOrVdc") != null ? (String) request.getAttribute("municipalityOrVdc") : "";
+    int ward = request.getAttribute("ward") != null ? (Integer) request.getAttribute("ward") : 0;
+    String longitudeLatitude = request.getAttribute("longitudeLatitude") != null ? (String) request.getAttribute("longitudeLatitude") : "";
+    java.time.LocalDate dateOfIncident = request.getAttribute("dateOfIncident") != null ? (java.time.LocalDate) request.getAttribute("dateOfIncident") : java.time.LocalDate.now();
+    String reportedBy = request.getAttribute("reportedBy") != null ? (String) request.getAttribute("reportedBy") : "";
+    String assignedCoordinator = request.getAttribute("assignedCoordinator") != null ? (String) request.getAttribute("assignedCoordinator") : "";
+    int noOfInjuries = request.getAttribute("noOfInjuries") != null ? (Integer) request.getAttribute("noOfInjuries") : 0;
+    int noOfDeath = request.getAttribute("noOfDeath") != null ? (Integer) request.getAttribute("noOfDeath") : 0;
+    int noOfMissing = request.getAttribute("noOfMissing") != null ? (Integer) request.getAttribute("noOfMissing") : 0;
+    double estimatedLoss = request.getAttribute("estimatedLoss") != null ? (Double) request.getAttribute("estimatedLoss") : 0.0;
+    String otherNotes = request.getAttribute("otherNotes") != null ? (String) request.getAttribute("otherNotes") : "";
+%>
 	
 	<div class="form-container">
+	
+		<% if(request.getAttribute("update_disaster_error") != null) { %>
+		    <p style="color: red; text-align: center;">
+		        <%= request.getAttribute("update_disaster_error") %>
+		    </p>
+		<% } %>
+		
 	    <h2>Update Disaster Record</h2>
 	    <form action="" method="post">
 	    
 	    	<div class="form-group">
 	            <label for="disasterTitle">Disaster Id</label>
-	            <input type="text" id="disasterId" name="disasterId" value="<%=disasterId%>" required>
+	            <input type="text" id="disasterId" name="disasterId" value="<%=disasterId%>" readonly>
 	        </div>
 	        
 	        <div class="form-group">
