@@ -108,6 +108,14 @@ public class ValidationUtil {
         return phone.matches("^(97|98)\\d{8}$");
     }
     
-
-    
+    /**
+     * Checks if two password strings match exactly.
+     *
+     * @param password1 The first password.
+     * @param password2 The second password (e.g., confirm password).
+     * @return true if both passwords match, false otherwise.
+     */
+    public static boolean doPasswordsMatch(String password1, String password2) {
+        return password1 != null && password1.equals(password2);
+    }
 }
