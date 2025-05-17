@@ -168,7 +168,7 @@ public class RegisterPageController extends HttpServlet {
 	    request.setAttribute("address_val", request.getParameter("address"));
 	    request.setAttribute("usertype_val", request.getParameter("usertype"));
 		
-		request.getRequestDispatcher("WEB-INF/pages/register.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/register.jsp").forward(request, response);
 		return;
 	}
 

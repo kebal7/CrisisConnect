@@ -49,6 +49,17 @@ public class ValidationUtil {
     public static boolean isAlphanumeric(String text) {
         return text.matches("[a-zA-Z0-9]+"); // Match letters and digits only
     }
+    
+    /**
+     * Validates if the provided text contains only alphanumeric characters and spaces.
+     * Useful for validating names, titles, or general text input where punctuation is not allowed.
+     *
+     * @param text The text to be validated.
+     * @return True if the text contains only letters, digits, and spaces; false otherwise.
+     */
+    public static boolean isAlphanumericWithSpaces(String text) {
+        return text.matches("[a-zA-Z0-9 ]+");
+    }
 
     /**
      * Validates if the provided text is a valid email address format.
@@ -141,4 +152,64 @@ public class ValidationUtil {
         return text.matches("\\d*\\.?\\d+");
     }
 
+    /**
+     * Validates if the given string is a valid latitude.
+     * @param text The string to validate.
+     * @return True if it's a valid latitude, false otherwise.
+     */
+    public static boolean isValidLatitude(String text) {
+        try {
+            double lat = Double.parseDouble(text);
+            return lat >= -90 && lat <= 90;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Validates if the given string is a valid longitude.
+     * @param text The string to validate.
+     * @return True if it's a valid longitude, false otherwise.
+     */
+    public static boolean isValidLongitude(String text) {
+        try {
+            double lon = Double.parseDouble(text);
+            return lon >= -180 && lon <= 180;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
+    /**
+     * Checks whether the provided latitude and longitude fall within Nepal's geographical bounds.
+     *
+     * @param latitude The latitude value to validate.
+     * @param longitude The longitude value to validate.
+     * @return True if both latitude and longitude are within Nepal's range, false otherwise.
+     */
+    public static boolean isWithinNepal(double latitude, double longitude) {
+        return latitude >= 26 && latitude <= 31 &&
+               longitude >= 80 && longitude <= 90;
+    }
+    
+    /**
+     * Validates if the provided comma-separated latitude and longitude are in correct format
+     * and fall within Nepal's geographic range.
+     *
+     * @param latLon A string in the format "latitude,longitude"
+     * @return True if valid format and within Nepal, false otherwise.
+     */
+    public static boolean isValidLatLon(String latLon) {
+        if (isNullOrEmpty(latLon)) return false;
+        String[] parts = latLon.split(",");
+        if (parts.length != 2) return false;
+
+        try {
+            double lat = Double.parseDouble(parts[0].trim());
+            double lon = Double.parseDouble(parts[1].trim());
+            return isValidLatitude(Double.toString(lat)) && isValidLongitude(Double.toString(lon)) && isWithinNepal(lat, lon);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 }

@@ -59,6 +59,13 @@
 	<jsp:include page="nav.jsp"/>
 	
 	<div class="form-container">
+	
+		<% if(request.getAttribute("add_disaster_error") != null) { %>
+		    <p style="color: red; text-align: center;">
+		        <%= request.getAttribute("add_disaster_error") %>
+		    </p>
+		<% } %>
+		
 	    <h2>Report New Disaster</h2>
 	    <form action="" method="post">
 	        <div class="form-group">
@@ -98,7 +105,7 @@
 	        </div>
 	
 	        <div class="form-group">
-	            <label for="longitudeLatitude">Longitude, Latitude</label>
+	            <label for="longitudeLatitude">Latitude, Longitude</label>
 	            <input type="text" id="longitudeLatitude" name="longitudeLatitude">
 	        </div>
 	
