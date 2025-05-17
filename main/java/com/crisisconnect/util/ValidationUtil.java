@@ -116,4 +116,14 @@ public class ValidationUtil {
     public static boolean doPasswordsMatch(String password1, String password2) {
         return password1 != null && password1.equals(password2);
     }
+    
+    /**
+     * Checks if the given string is null or empty.
+     *
+     * @param value The string to check.
+     * @return true if the string is null or empty, false otherwise.
+     */
+    public static boolean isNullOrEmpty(String value) {
+        return value == null || value.trim().isEmpty();
+    }
 }
