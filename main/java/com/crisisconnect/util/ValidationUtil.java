@@ -1,8 +1,6 @@
 package com.crisisconnect.util;
 
 
-
-
 /**
 * @author Kebal Badal LMU ID: 23048668
 */
