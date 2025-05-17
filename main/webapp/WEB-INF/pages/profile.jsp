@@ -95,6 +95,9 @@
 	    <input type="hidden" name="username" value="<%=username%>">
 	    
 	    <div class="profile-info">
+	    	<label>Username:</label>
+	        <span class=""><%=username%></span>
+	        
 	        <label>Full Name:</label>
 	        <span class="editable"><%=fullName%></span>
 	        <input class="edit-input" type="text" name="fullName" value="<%=fullName%>" style="display:none;" />
