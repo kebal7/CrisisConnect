@@ -3,6 +3,7 @@ package com.crisisconnect.controller.servlet;
 import com.crisisconnect.model.UserModel;
 import com.crisisconnect.service.RegistrationService;
 import com.crisisconnect.util.PasswordUtil;
+import com.crisisconnect.util.ValidationUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -54,6 +55,47 @@ public class RegisterPageController extends HttpServlet {
 		String userType = request.getParameter("usertype");
 		String imagePath = "null";
         
+		// 🛡️ FIELD VALIDATIONS
+		if (userName == null || !ValidationUtil.isAlphanumeric(userName)) {
+			handleError("Username must be alphanumeric and cannot be empty.", request, response);
+			return;
+		}
+
+		if (fullName == null || !ValidationUtil.isTextOnly(fullName)) {
+			handleError("Full Name must contain only letters and spaces.", request, response);
+			return;
+		}
+
+		if (email == null || !ValidationUtil.isEmail(email)) {
+			handleError("Please enter a valid email address.", request, response);
+			return;
+		}
+
+		if (password == null || !ValidationUtil.isValidPassword(password)) {
+			handleError("Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.", request, response);
+			return;
+		}
+
+		if (phoneNumber == null || !ValidationUtil.isValidPhoneNumber(phoneNumber)) {
+			handleError("Phone number must start with 97 or 98 and be 10 digits long.", request, response);
+			return;
+		}
+
+		if (dob == null || dob.trim().isEmpty()) {
+			handleError("Date of Birth cannot be empty.", request, response);
+			return;
+		}
+
+		if (address == null || address.trim().isEmpty() || !ValidationUtil.hasNoSpecialCharacters(address)) {
+			handleError("Address cannot be empty and must not contain special characters.", request, response);
+			return;
+		}
+
+		if (userType == null || (!userType.equalsIgnoreCase("admin") && !userType.equalsIgnoreCase("user"))) {
+			handleError("Invalid user type selected.", request, response);
+			return;
+		}
+		
         UserModel user = new UserModel(userName, fullName, userType, password, email, phoneNumber, dob, address, imagePath);
         
         int isUniqueUsername = registrationService.isUniqueUsername(userName);
@@ -95,6 +137,17 @@ public class RegisterPageController extends HttpServlet {
 	
 	private void handleError(String errorMessage, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("registration_error", errorMessage);
+		
+	    // Store form fields to repopulate form
+	    request.setAttribute("username_val", request.getParameter("username"));
+	    request.setAttribute("fullname_val", request.getParameter("fullName"));
+	    request.setAttribute("email_val", request.getParameter("email"));
+	    request.setAttribute("password_val", request.getParameter("password"));
+	    request.setAttribute("phone_val", request.getParameter("phoneNumber"));
+	    request.setAttribute("dob_val", request.getParameter("dob"));
+	    request.setAttribute("address_val", request.getParameter("address"));
+	    request.setAttribute("usertype_val", request.getParameter("usertype"));
+		
 		request.getRequestDispatcher("WEB-INF/pages/register.jsp").forward(request, response);
 		return;
 	}
