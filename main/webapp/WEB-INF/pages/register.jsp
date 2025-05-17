@@ -85,19 +85,19 @@
 		</script>
         
         <form action="" method="post" onsubmit="return validateForm()">
-            <input type="text" name="username" value="${username_val != null ? username_val : ''}" placeholder="Username" required />
-            <input type="text" name="fullName" value="${fullname_val != null ? fullname_val : ''}" placeholder="Full Name" required>
-            <input type="email" name="email" value="${email_val != null ? email_val : ''}" placeholder="Email" required />
-            <input type="password" name="password" value="${phone_val != null ? phone_val : ''}" placeholder="Password" required />
-            <input type="password" name="confirmPassword" value="${phone_val != null ? phone_val : ''}" placeholder="Confirm Password" required />
-            <input type="number" name="phoneNumber" value="${phone_val != null ? phone_val : ''}" placeholder = "Phone Number" required/>
-            <input type="date" name="dob" value="${dob_val != null ? dob_val : ''}" placeholder="Date" required/>
-            <input type="text" name="address"  name="address" value="${address_val != null ? address_val : ''}" placeholder="Address" required/>
+            <input type="text" name="username" value="${username_val}" placeholder="Username" required />
+            <input type="text" name="fullName" value="${fullname_val}" placeholder="Full Name" required>
+            <input type="email" name="email" value="${email_val}" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" required />
+            <input type="tel" name="phoneNumber" value="${phone_val}" placeholder = "Phone Number" required/>
+            <input type="date" name="dob" value="${dob_val}" placeholder="Date" required/>
+            <input type="text" name="address" value="${address_val}" placeholder="Address" required/>
             
             <select name="usertype" required>
         		<option value="" disabled selected>Select User Type</option>
         		<option value="user" ${usertype_val == 'user' ? "selected" : ""}>User</option>
-        		<option value="admin" ${usertype_val == 'user' ? "selected" : ""}>Admin</option>
+        		<option value="admin" ${usertype_val == 'admin' ? "selected" : ""}>Admin</option>
     		</select>
             
             <input type="submit" value="Register" />

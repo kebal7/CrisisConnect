@@ -43,12 +43,14 @@ public class RegisterPageController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if(registrationService.getDbConn() == null) {
 			handleError("Couldn't Connect to Database, Please Try Again Later", request, response);
+			return;
 		}
 		
 		String userName = request.getParameter("username");
 		String fullName = request.getParameter("fullName");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		String confirmPassword = request.getParameter("confirmPassword");
 		String phoneNumber = request.getParameter("phoneNumber");
 		String dob = request.getParameter("dob");
 		String address = request.getParameter("address");
@@ -70,12 +72,23 @@ public class RegisterPageController extends HttpServlet {
 			handleError("Please enter a valid email address.", request, response);
 			return;
 		}
-
+		
+		if(password == null || confirmPassword == null) {
+			handleError("Please enter valid password", request, response);
+			return;
+		}
+		
+		if (!ValidationUtil.doPasswordsMatch(password, confirmPassword)) {
+			handleError("Passwords do not match.", request, response);
+			return;
+		}
+		
 		if (password == null || !ValidationUtil.isValidPassword(password)) {
 			handleError("Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.", request, response);
 			return;
 		}
-
+		
+		
 		if (phoneNumber == null || !ValidationUtil.isValidPhoneNumber(phoneNumber)) {
 			handleError("Phone number must start with 97 or 98 and be 10 digits long.", request, response);
 			return;
@@ -143,6 +156,7 @@ public class RegisterPageController extends HttpServlet {
 	    request.setAttribute("fullname_val", request.getParameter("fullName"));
 	    request.setAttribute("email_val", request.getParameter("email"));
 	    request.setAttribute("password_val", request.getParameter("password"));
+	    request.setAttribute("confirm_password_val", request.getParameter("confirmPassword"));
 	    request.setAttribute("phone_val", request.getParameter("phoneNumber"));
 	    request.setAttribute("dob_val", request.getParameter("dob"));
 	    request.setAttribute("address_val", request.getParameter("address"));
