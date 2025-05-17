@@ -155,7 +155,7 @@ public class AddDisasterPageController extends HttpServlet {
 
 	private void handleError(String errorMessage, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("add_disaster_error", errorMessage);
-		request.getRequestDispatcher("/WEB-INF/pages/addDisaster.jsp").forward(request, response);
+		doGet(request,response);
 		return;
 	}
 
