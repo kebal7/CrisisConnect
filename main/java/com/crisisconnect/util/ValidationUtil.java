@@ -1,5 +1,25 @@
 package com.crisisconnect.util;
 
+
+
+
+/**
+* @author Kebal Badal LMU ID: 23048668
+*/
+
+/**
+ * ValidationUtil provides utility methods for validating user input data such as
+ * text fields, numbers, email addresses, passwords, and more. These
+ * methods are typically used during user registration or form submissions to ensure
+ * data integrity and consistency.
+ *
+ * It includes common validations like checking for alphabetic characters,
+ * numeric-only strings, alphanumeric values, valid email formats, password
+ * complexity, and phone number format (e.g., Nepali numbers).
+ *
+ * All methods are static and can be used directly without creating an instance of this class.
+ */
+
 public class ValidationUtil {
 
     /**
@@ -77,15 +97,15 @@ public class ValidationUtil {
         return text.length() == length;
     }
     
-    
     /**
-     * Checks if the provided gender matches "male" or "female" (ignoring case).
+     * Validates if the provided phone number is valid according to Nepali mobile number format.
+     * Nepali mobile numbers typically start with 97 or 98 and are 10 digits long.
      * 
-     * @param gender The gender to be validated.
-     * @return True if the gender matches "male" or "female", false otherwise.
+     * @param phone The phone number to be validated.
+     * @return True if the phone number is valid (starts with 97 or 98 and has 10 digits), false otherwise.
      */
-    public static boolean isGenderMatches(String gender) {
-        // Convert the gender to lowercase and compare with "male" and "female" ignoring case
-        return gender != null && (gender.equalsIgnoreCase("male") || gender.equalsIgnoreCase("female"));
+    public static boolean isValidPhoneNumber(String phone) {
+        return phone.matches("^(97|98)\\d{8}$");
     }
+    
 }
