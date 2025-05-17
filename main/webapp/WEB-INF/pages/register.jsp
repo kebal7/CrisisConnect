@@ -61,7 +61,7 @@
     
 </head>
 <body>
-		
+
 	<div class="register-container">
         <h2>Create Account</h2>
         
@@ -106,3 +106,10 @@
     </div>
 </body>
 </html>
+
+
+
+
+
+
+
