@@ -126,4 +126,19 @@ public class ValidationUtil {
     public static boolean isNullOrEmpty(String value) {
         return value == null || value.trim().isEmpty();
     }
+    
+    /**
+     * Validates whether the given text is a valid positive decimal number.
+     * 
+     * This includes integers and floating-point numbers without any sign.
+     * Examples of valid inputs: "123", "0.99", "0", ".5"
+     * Examples of invalid inputs: "-123", "+5.6", "abc"
+     *
+     * @param text The string to validate.
+     * @return True if the text is a valid positive decimal number, false otherwise.
+     */
+    public static boolean isValidDecimal(String text) {
+        return text.matches("\\d*\\.?\\d+");
+    }
+
 }
