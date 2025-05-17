@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import com.crisisconnect.model.DisasterModel;
 import com.crisisconnect.service.DisasterService;
 import com.crisisconnect.service.RegistrationService;
+import com.crisisconnect.util.ValidationUtil;
 
 /**
  * Servlet implementation class AdminPanelController
@@ -45,7 +46,10 @@ public class AddDisasterPageController extends HttpServlet {
 		HttpSession userSession = request.getSession();
 		String sessionUser = (String) userSession.getAttribute("username");
 		
+		//dummy disaster id to create model, not passed in database
 		String disasterIdStr = "1";
+		int disasterId = Integer.parseInt(disasterIdStr);
+		
 		String disasterTitle = request.getParameter("disasterTitle");
 		String disasterType = request.getParameter("disasterType");
 		String municipalityOrVdc = request.getParameter("municipalityOrVdc");
@@ -60,8 +64,19 @@ public class AddDisasterPageController extends HttpServlet {
 		String estimatedLossStr = request.getParameter("estimatedLoss");
 		String otherNotes = request.getParameter("otherNotes");
 		
+		//Validates compulsory fields
+		if(disasterTitle == null || !ValidationUtil.isAlphanumeric(disasterTitle)) {
+			handleError("Disaster title must be alphanumeric and cannot be empty.", request, response);
+			return;
+		}
+		
+		if (dateOfIncidentStr == null || dateOfIncidentStr.trim().isEmpty()) {
+			handleError("Date of Incident cannot be empty.", request, response);
+			return;
+		}
+		
+		
 		// parse to appropriate data types
-		int disasterId = Integer.parseInt(disasterIdStr);
 		int ward = Integer.parseInt(wardStr);
 		LocalDate dateOfIncident = LocalDate.parse(dateOfIncidentStr);
 		int noOfInjuries = Integer.parseInt(noOfInjuriesStr);
@@ -89,6 +104,11 @@ public class AddDisasterPageController extends HttpServlet {
 		disasterService.addDisaster(formDisaster);
  
 		doGet(request, response);
+	}
+
+	private void handleError(String errorMessage, HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
