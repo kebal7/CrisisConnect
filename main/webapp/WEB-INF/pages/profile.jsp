@@ -87,6 +87,13 @@
 <jsp:include page="nav.jsp"/>
 
 <div class="container">
+	
+		<% if(request.getAttribute("profile_update_error") != null) { %>
+		    <p style="color: red; text-align: center;">
+		        <%= request.getAttribute("profile_update_error") %>
+		    </p>
+		<% } %>
+		
     <div class="profile-pic">
         <img src="<%=imagePath != null ? imagePath : "default-profile.png" %>" alt="Profile Picture">
     </div>

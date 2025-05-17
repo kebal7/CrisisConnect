@@ -14,6 +14,7 @@ import com.crisisconnect.service.ProfileUpdateService;
 import com.crisisconnect.service.RegistrationService;
 import com.crisisconnect.service.UserInfoService;
 import com.crisisconnect.util.PasswordUtil;
+import com.crisisconnect.util.ValidationUtil;
 
 /**
  * Servlet implementation class ProfilePageController
@@ -85,6 +86,38 @@ public class ProfilePageController extends HttpServlet {
 		String address = request.getParameter("address");
 		String imagePath = "null";
 		
+		// 🛡️ FIELD VALIDATIONS
+		if (fullName == null || !ValidationUtil.isTextOnly(fullName)) {
+			handleError("Full Name must contain only letters and spaces.", request, response);
+			return;
+		}
+
+		if (email == null || !ValidationUtil.isEmail(email)) {
+			handleError("Please enter a valid email address.", request, response);
+			return;
+		}
+		
+		if (password == null || !ValidationUtil.isValidPassword(password)) {
+			handleError("Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.", request, response);
+			return;
+		}
+		
+		if (phoneNumber == null || !ValidationUtil.isValidPhoneNumber(phoneNumber)) {
+			handleError("Phone number must start with 97 or 98 and be 10 digits long.", request, response);
+			return;
+		}
+
+		if (dob == null || dob.trim().isEmpty()) {
+			handleError("Date of Birth cannot be empty.", request, response);
+			return;
+		}
+
+		if (address == null || address.trim().isEmpty() || !ValidationUtil.hasNoSpecialCharacters(address)) {
+			handleError("Address cannot be empty and must not contain special characters.", request, response);
+			return;
+		}
+		
+		
 		UserModel user = new UserModel(userName, fullName, userType, password, email, phoneNumber, dob, address, imagePath);
 		
 		user.setPassword(PasswordUtil.encrypt((user.getUsername()), user.getPassword()));
@@ -100,6 +133,12 @@ public class ProfilePageController extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private void handleError(String errorMessage, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("profile_update_error", errorMessage);
+		doGet(request, response);
+		return;
 	}
 
 }
