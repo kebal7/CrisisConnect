@@ -48,6 +48,8 @@ public class ViewPageController extends HttpServlet {
 	    String action = request.getParameter("action");
 	    String searchQuery = request.getParameter("searchQuery");
 	    
+	    String sortBy = request.getParameter("sortBy");
+	    String sortType = request.getParameter("sortType");
 		
 	    // If Search button was clicked
 	    if ("search".equals(action)) {
@@ -67,6 +69,26 @@ public class ViewPageController extends HttpServlet {
 	            // Forward the request to the JSP page
 	            request.getRequestDispatcher("/WEB-INF/pages/view.jsp").forward(request, response);
 	        }
+	    }
+	    
+	    if ("sort".equals(action)) {	    	
+	        if (sortBy == null || sortBy.trim().isEmpty()) {
+	            sortBy = "disasterId";
+	        }
+	        if (sortType == null || sortType.trim().isEmpty()) {
+	            sortType = "ascending";
+	        }
+
+	        String trimmedLowerSortBy = sortBy.toLowerCase().trim().replaceAll("\\s+", "");
+	        String trimmedLowerSortType = sortType.toLowerCase().trim().replaceAll("\\s+", "");
+	        
+	        List<DisasterModel> disasterList = disasterService.getSortedList(trimmedLowerSortBy, trimmedLowerSortType);
+	        
+            // Set the sorted disaster list an attribute in the request
+            request.setAttribute("disasters", disasterList);
+
+            // Forward the request to the JSP page
+            request.getRequestDispatcher("/WEB-INF/pages/view.jsp").forward(request, response);
 	    }
 	}
 

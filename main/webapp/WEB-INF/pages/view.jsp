@@ -115,12 +115,17 @@
 		
 		    <!-- Sort Dropdown -->
 		    <select name="sortBy" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-		        <option value="">Sort by</option>
 		        <option value="disasterId">Disaster ID</option>
 		        <option value="disasterTitle">Title</option>
 		        <option value="dateOfIncident">Date</option>
 		        <option value="noOfDeath">Deaths</option>
 		        <option value="noOfInjuries">Injuries</option>
+		    </select>
+		    
+		    <!-- Sort Type Dropdown -->
+		    <select name="sortType" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+		        <option value="Ascending">Ascending</option>
+		        <option value="Descending">Descending</option>
 		    </select>
 		
 		    <button type="submit" name="action" value="sort"

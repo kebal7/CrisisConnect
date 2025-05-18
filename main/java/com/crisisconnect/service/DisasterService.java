@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.crisisconnect.config.DbConfig;
 import com.crisisconnect.model.DisasterModel;
@@ -258,6 +259,72 @@ public class DisasterService {
 		}
 		return disasters;
 	}
-	
+
+	public List<DisasterModel> getSortedList(String trimmedLowerSortBy, String trimmedLowerSortType) {
+		List<DisasterModel> disasters = new ArrayList<>();
+		
+		String sortByRaw = trimmedLowerSortBy.trim().toLowerCase();
+		String sortOrderRaw = trimmedLowerSortType.trim().toLowerCase();
+		
+		Map<String, String> fieldMap = Map.of(
+			    "disasterid", "disasterId",
+			    "disastertitle", "disasterTitle",
+			    "dateofincident", "dateOfIncident",
+			    "noofdeath", "noOfDeath",
+			    "noofinjuries", "noOfInjuries"
+			);
+		
+		Map<String, String> orderMap = Map.of(
+			    "ascending", "asc",
+			    "descending", "desc"
+			);
+		
+		// Get mapped field or use default
+		String sortBy = fieldMap.getOrDefault(sortByRaw, "disasterId");
+		String sortType = orderMap.getOrDefault(sortOrderRaw, "asc");
+		
+		
+	    // Whitelist allowed column names and sort types
+	    List<String> allowedFields = List.of("disasterId", "disasterTitle", "dateOfIncident", "noOfDeath", "noOfInjuries");
+	    List<String> allowedOrders = List.of("asc", "desc"); // allow both for flexibility
+	    
+	    // Fallback to default if invalid
+	    String field = allowedFields.contains(sortBy) ? sortBy : "disasterId";
+	    String order = allowedOrders.contains(sortType.toLowerCase()) ? sortType.toUpperCase() : "ASC";
+
+	    String query = "SELECT * FROM disasterrecord ORDER BY " + field + " " + order;
+	    
+	    try {
+	        PreparedStatement stmt = dbConn.prepareStatement(query);
+	        ResultSet resultSet = stmt.executeQuery();
+
+	        while (resultSet.next()) {
+	            int id = resultSet.getInt("disasterId");
+	            String title = resultSet.getString("disasterTitle");
+	            String type = resultSet.getString("disasterType");
+	            String municipality = resultSet.getString("municipalityOrVdc");
+	            int ward = Integer.parseInt(resultSet.getString("ward"));
+	            String coordinates = resultSet.getString("longitudeLatitude");
+	            LocalDate date = resultSet.getDate("dateOfIncident").toLocalDate();
+	            String reporter = resultSet.getString("reportedBy");
+	            String coordinator = resultSet.getString("assignedCoordinator");
+	            int injuries = resultSet.getInt("noOfInjuries");
+	            int deaths = resultSet.getInt("noOfDeath");
+	            int missing = resultSet.getInt("noOfMissing");
+	            double loss = resultSet.getDouble("estimatedLoss");
+	            String notes = resultSet.getString("otherNotes");
+
+	            DisasterModel disaster = new DisasterModel(id, title, type, municipality, ward, coordinates,
+	                                                       date, reporter, coordinator, injuries, deaths,
+	                                                       missing, loss, notes);
+	            disasters.add(disaster);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return disasters;
+
+	}
 }
 
