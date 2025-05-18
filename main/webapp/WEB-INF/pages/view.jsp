@@ -101,7 +101,7 @@
   <div class="container">
         <h2>Disaster Records</h2>
         
-		<form method="post" action="viewDisasters" style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+		<form method="post" action="" style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
 		    
 		    <!-- Search Bar -->
 		    <input type="text" name="searchQuery" placeholder="Search disaster..." 

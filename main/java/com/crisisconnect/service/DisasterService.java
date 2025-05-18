@@ -220,5 +220,44 @@ public class DisasterService {
 			return -1; // Internal error
 		}
 	}
+
+	public List<DisasterModel> getDisasterByName(String lowerQuery) {
+		List<DisasterModel> disasters = new ArrayList<>();
+		
+		String retriever_disaster_query = "SELECT * FROM disasterrecord WHERE LOWER(disasterTitle) LIKE ?";
+		try {
+			PreparedStatement stmt = dbConn.prepareStatement(retriever_disaster_query);
+			stmt.setString(1, "%" + lowerQuery.toLowerCase() + "%");
+			
+			ResultSet resultSet = stmt.executeQuery();
+			
+            // Iterating through the result set and adding DisasterModel objects to the list
+            while (resultSet.next()) {
+            	int id = resultSet.getInt("disasterId");
+            	String title = resultSet.getString("disasterTitle");
+            	String type = resultSet.getString("disasterType");
+            	String municipality = resultSet.getString("municipalityOrVdc");
+            	int ward = Integer.parseInt(resultSet.getString("ward"));
+            	String coordinates = resultSet.getString("longitudeLatitude");
+            	LocalDate date = resultSet.getDate("dateOfIncident").toLocalDate();
+            	String reporter = resultSet.getString("reportedBy");
+            	String coordinator = resultSet.getString("assignedCoordinator");
+            	int injuries = resultSet.getInt("noOfInjuries");
+            	int deaths = resultSet.getInt("noOfDeath");
+            	int missing = resultSet.getInt("noOfMissing");
+            	double loss = resultSet.getDouble("estimatedLoss");
+            	String notes = resultSet.getString("otherNotes");
+
+            	DisasterModel disaster = new DisasterModel(id, title, type, municipality, ward, coordinates,
+            	                                           date, reporter, coordinator, injuries, deaths,
+            	                                           missing, loss, notes);
+                disasters.add(disaster); // Add the disaster object to the list
+            }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return disasters;
+	}
 	
 }
+

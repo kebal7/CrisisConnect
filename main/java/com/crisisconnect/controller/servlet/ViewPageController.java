@@ -45,8 +45,51 @@ public class ViewPageController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	    String action = request.getParameter("action");
+	    String searchQuery = request.getParameter("searchQuery");
+	    
+		
+	    // If Search button was clicked
+	    if ("search".equals(action)) {
+	    	if(searchQuery == null || searchQuery.trim().isEmpty()) {
+	    		doGet(request, response);
+	    		return;
+	    	}
+	    	
+	        if (searchQuery != null && !searchQuery.trim().isEmpty()) {
+	            String trimmedLowerQuery = searchQuery.toLowerCase().trim();
+	            
+	            List<DisasterModel> disasterList = disasterService.getDisasterByName(trimmedLowerQuery);
+	            
+	            // Set the disaster list according to search as an attribute in the request
+	            request.setAttribute("disasters", disasterList);
+
+	            // Forward the request to the JSP page
+	            request.getRequestDispatcher("/WEB-INF/pages/view.jsp").forward(request, response);
+	        }
+	    }
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
