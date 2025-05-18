@@ -8,9 +8,22 @@ import java.sql.SQLException;
 import com.crisisconnect.config.DbConfig;
 import com.crisisconnect.model.UserModel;
 
+/**
+* @author Kebal Badal LMU ID: 23048668
+*/
+
+/**
+ * Service class responsible for user registration and validation processes.
+ * Handles database connection and operations related to inserting a new user
+ * and checking uniqueness of username, email, and phone number.
+ */
 
 public class RegistrationService {
 	private Connection dbConn;
+	
+	/**
+	 * Constructor to initialize the database connection.
+	 */
 	
 	public RegistrationService() {
 		try {
@@ -21,7 +34,13 @@ public class RegistrationService {
 		}
 	}
 	
-	
+
+	/**
+	 * Returns the active database connection.
+	 * If connection is null, attempts to establish a new one.
+	 *
+	 * @return Connection object
+	 */
 	
 	public Connection getDbConn() {
 		if(dbConn == null) {
@@ -34,6 +53,14 @@ public class RegistrationService {
 		}
 		return dbConn;
 	}
+	
+	/**
+	 * Registers a new user in the database using the provided user model.
+	 *
+	 * @param user The UserModel object containing registration data
+	 * @return 1 if registration is successful, 0 if failed, -1 if internal error
+	 * @throws ClassNotFoundException if database driver is not found
+	 */
 
 
 	public int registerUser(UserModel user) throws ClassNotFoundException {
@@ -75,6 +102,13 @@ public class RegistrationService {
 		}
 	}
 	
+	/**
+	 * Checks whether a given username is unique (not already present in the database).
+	 *
+	 * @param formUserName The username to check
+	 * @return 1 if unique, 0 if already exists, -1 if internal error
+	 */
+	
 	public int isUniqueUsername(String formUserName) {
 		String query_get_username = "SELECT username FROM users WHERE username = ?";
 		
@@ -97,6 +131,13 @@ public class RegistrationService {
 		}
 	}
 	
+	/**
+	 * Checks whether a given email is unique (not already present in the database).
+	 *
+	 * @param formEmail The email to check
+	 * @return 1 if unique, 0 if already exists, -1 if internal error
+	 */
+	
 	public int isUniqueEmail(String formEmail) {
 		String query_get_username = "SELECT username FROM users WHERE email = ?";
 		
@@ -118,6 +159,13 @@ public class RegistrationService {
 			return -1; //return -1 if internal error
 		}
 	}
+	
+	/**
+	 * Checks whether a given phone number is unique (not already present in the database).
+	 *
+	 * @param formPhoneNo The phone number to check
+	 * @return 1 if unique, 0 if already exists, -1 if internal error
+	 */
 	
 	public int isUniquePhoneNo(String formPhoneNo) {
 		String query_get_username = "SELECT username FROM users WHERE phone_number = ?";
