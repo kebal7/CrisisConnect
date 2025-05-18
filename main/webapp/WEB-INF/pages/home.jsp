@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/nav.css" />
+
 <meta charset="UTF-8">
 <title>Crisis Connect</title>
 
@@ -11,23 +14,6 @@
             margin: 0;
             font-family: "Segoe UI", sans-serif;
             background: #f2f6fc;
-        }
-
-        .header {
-            background: #007BFF;
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header h1 {
-            margin: 0;
-        }
-
-        .welcome {
-            font-size: 18px;
         }
 
         .dashboard {
@@ -61,7 +47,7 @@
             font-size: 16px;
         }
 
-        .nav-links a {
+        .home-nav_buttons a {
             margin: 10px;
             padding: 12px 24px;
             background: #28a745;
@@ -71,7 +57,7 @@
             display: inline-block;
         }
 
-        .nav-links a:hover {
+        .home-nav_buttons a:hover {
             background: #218838;
         }
 
@@ -181,7 +167,7 @@
     </div>
 </div>
 
-    <div class="nav-links">
+    <div class="home-nav_buttons">
         <a href="view-disasters.jsp">View Disasters</a>
         <% if ("admin".equalsIgnoreCase("usertype")) { %>
             <a href="add-disaster.jsp">Add Disaster</a>

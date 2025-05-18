@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/nav.css" />
+
 <meta charset="UTF-8">
 <title>View Disaster</title>
 
@@ -15,24 +18,7 @@
             background: #f2f6fc;
         }
 
-        .header {
-            background: #007BFF;
-            color: white;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header h1 {
-            margin: 0;
-        }
-
-        .welcome {
-            font-size: 18px;
-        }
-        
-               .container {
+		.container {
             padding: 30px;
         }
 
@@ -197,7 +183,7 @@
 			    <% 
 			        } else { 
 			    %>
-			        <a href="${pageContext.request.contextPath}/home">Back to Home</a>
+			        <a href="${pageContext.request.contextPath}/userhome">Back to Home</a>
 			    <% 
 			        } 
 	    		%>

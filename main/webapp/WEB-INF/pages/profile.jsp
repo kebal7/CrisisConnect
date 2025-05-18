@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/nav.css" />
     <meta charset="UTF-8">
     <title>Your Profile</title>
     <style>

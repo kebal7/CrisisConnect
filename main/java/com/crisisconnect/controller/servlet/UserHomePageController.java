@@ -5,40 +5,40 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
+import java.util.List;
+
+import com.crisisconnect.model.DisasterModel;
+import com.crisisconnect.service.DisasterService;
 
 /**
- * Servlet implementation class HomePageController
+ * Servlet implementation class UserHomePageController
  */
-@WebServlet("/home")
-public class HomePageController extends HttpServlet {
+@WebServlet("/userhome")
+public class UserHomePageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	private final DisasterService disasterService;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HomePageController() {
+    public UserHomePageController() {
         super();
-        // TODO Auto-generated constructor stub
+        this.disasterService = new DisasterService();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String usertype = (String) session.getAttribute("usertype");
-		
-		if(usertype.equals("admin")) {
-			response.sendRedirect(request.getContextPath() + "/adminhome");
-			return;
-		}else if(usertype.equals("user")) {
-			response.sendRedirect(request.getContextPath() + "/userhome");
-			return;
-		}
-		request.getRequestDispatcher("/WEB-INF/pages/home.jsp").forward(request, response);
+        // Fetch the list of DisasterModel objects
+        List<DisasterModel> disasterList = disasterService.getAllDisasters();
+
+        // Set the disaster list as an attribute in the request
+        request.setAttribute("disasters", disasterList);
+
+        // Forward the request to the JSP page
+        request.getRequestDispatcher("/WEB-INF/pages/userhome.jsp").forward(request, response);
 	}
 
 	/**
@@ -48,5 +48,4 @@ public class HomePageController extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

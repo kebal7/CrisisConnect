@@ -3,14 +3,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/nav.css" />
+
 <meta charset="UTF-8">
 <title>Crisis Connect Admin Panel</title>
 
 <style>
 
        body {
+            margin: 0;
             font-family: "Segoe UI", sans-serif;
-            background: #f9f9f9;
+            background: #f2f6fc;
         }
         .form-container {
             max-width: 800px;

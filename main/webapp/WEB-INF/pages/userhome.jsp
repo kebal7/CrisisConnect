@@ -173,8 +173,7 @@ body {
 
 		<div class="home-nav-buttons">
 			<a href="${pageContext.request.contextPath}/view">View Disasters</a>
-			<a href="${pageContext.request.contextPath}/admin/adddisaster">Add Disaster</a> 
-			<a href="${pageContext.request.contextPath}/admin/managedisasterrecord">Manage Disaster Records</a>
+			<a href="${pageContext.request.contextPath}/profile">Profile</a> 
 		</div>
 	</div>
 
