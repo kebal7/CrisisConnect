@@ -187,9 +187,21 @@
                 %>
             </tbody>
         </table>
-        <div class="back-button">
-            <a href="home">Back to Home</a>
-        </div>
+        
+	        
+	        <div class="back-button">
+			    <% 
+			        if ("admin".equalsIgnoreCase(usertype)) { 
+			    %>
+			        <a href="${pageContext.request.contextPath}/adminhome">Back to Home</a>
+			    <% 
+			        } else { 
+			    %>
+			        <a href="${pageContext.request.contextPath}/home">Back to Home</a>
+			    <% 
+			        } 
+	    		%>
+        	</div>
     </div>    
 </body>
 </html>

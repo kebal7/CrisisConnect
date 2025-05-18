@@ -51,6 +51,24 @@
         button:hover {
             background: #0056b3;
         }
+        
+                .back-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-button a {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .back-button a:hover {
+            background-color: #0056b3;
+        }
 
 </style>
 
@@ -147,5 +165,9 @@
 	        <button type="submit">Submit Disaster Report</button>
 	    </form>
     </div>
+    
+        <div class="back-button">
+            <a href="${pageContext.request.contextPath}/adminhome">Back to Home</a>
+        </div>
 </body>
 </html>

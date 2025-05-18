@@ -1,31 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ page import="java.util.List, com.crisisconnect.model.DisasterModel" %>
-    
-<!DOCTYPE html>
-<html>
+
 <head>
-<meta charset="UTF-8">
-<title>Manage Disaster Record</title>
-
-<style>
-        body {
-            margin: 0;
-            font-family: "Segoe UI", sans-serif;
-            background: #f2f6fc;
-        }
-        
-		.container {
-            padding: 30px;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        table {
+	<style>
+		table {
             width: 100%;
             border-collapse: collapse;
             background: white;
@@ -51,38 +28,19 @@
         tr:hover {
             background-color: #f1f1f1;
         }
-
-        .back-button {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .back-button a {
-            background-color: #007BFF;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-        }
-
-        .back-button a:hover {
-            background-color: #0056b3;
-        }
-</style>
+	</style>
 </head>
-<body>
-	<jsp:include page="nav.jsp"/>
 
+<body>
 	<%
+	    String username = (String) session.getAttribute("username");
+	    String  usertype= (String) session.getAttribute("usertype");
+	    
 	    List<DisasterModel> disasterList = (List<DisasterModel>) request.getAttribute("disasters"); 
 	%>
-
-	 
-  <div class="container">
-        <h2>Manage Disaster Records</h2>
-
-        <table>
+	
+	<div>
+		<table>
             <thead>
                 <tr>
                     <th>ID</th>
@@ -99,7 +57,6 @@
                     <th>Missing</th>
                     <th>Loss (Rs)</th>
                     <th>Notes</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -122,15 +79,6 @@
                         <td><%= d.getNoOfMissing() %></td>
                         <td><%= d.getEstimatedLoss() %></td>
                         <td><%= d.getOtherNotes() %></td>
-                        
-                        <td>
-	                        <form action="" method="post" style="display:inline;">
-	                            <input type="hidden" name="id" value="<%= d.getDisasterId() %>">
-	                            
-	                            <button class="btn edit-btn" name="action" value="edit">Edit</button>
-	                            <button class="btn delete-btn" name="action" value="delete" onclick="return confirm('Are you sure?');">Delete</button>
-	                        </form>
-	                    </td>
                     </tr>
                 <% 
                         }
@@ -144,10 +92,5 @@
                 %>
             </tbody>
         </table>
-
-        <div class="back-button">
-            <a href="${pageContext.request.contextPath}/adminhome">Back to Home</a>
-        </div>
-    </div>    
+	</div>
 </body>
-</html>
