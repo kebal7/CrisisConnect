@@ -89,6 +89,7 @@
 </style>
 </head>
 <body>
+	<jsp:include page="nav.jsp"/>
 	<%
 	    String username = (String) session.getAttribute("username");
 	    String  usertype= (String) session.getAttribute("usertype");
@@ -99,7 +100,36 @@
 	 
   <div class="container">
         <h2>Disaster Records</h2>
-
+        
+		<form method="post" action="viewDisasters" style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+		    
+		    <!-- Search Bar -->
+		    <input type="text" name="searchQuery" placeholder="Search disaster..." 
+		           style="padding: 10px; width: 500px; border: 1px solid #ccc; border-radius: 4px;"
+		           value="<%= request.getAttribute("searchQuery") != null ? request.getAttribute("searchQuery") : "" %>">
+		
+		    <button type="submit" name="action" value="search"
+		            style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 4px;">
+		        Search
+		    </button>
+		
+		    <!-- Sort Dropdown -->
+		    <select name="sortBy" style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+		        <option value="">Sort by</option>
+		        <option value="disasterId">Disaster ID</option>
+		        <option value="disasterTitle">Title</option>
+		        <option value="dateOfIncident">Date</option>
+		        <option value="noOfDeath">Deaths</option>
+		        <option value="noOfInjuries">Injuries</option>
+		    </select>
+		
+		    <button type="submit" name="action" value="sort"
+		            style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 4px;">
+		        Sort
+		    </button>
+		
+		</form>
+        
         <table>
             <thead>
                 <tr>
@@ -152,11 +182,9 @@
                 %>
             </tbody>
         </table>
-
         <div class="back-button">
             <a href="home">Back to Home</a>
         </div>
     </div>    
-</div>
 </body>
 </html>

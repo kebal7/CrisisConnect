@@ -14,7 +14,6 @@
             font-family: "Segoe UI", sans-serif;
             background: #f2f6fc;
         }
-
         
 		.container {
             padding: 30px;
@@ -150,6 +149,5 @@
             <a href="home">Back to Home</a>
         </div>
     </div>    
-</div>
 </body>
 </html>
