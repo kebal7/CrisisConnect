@@ -17,8 +17,8 @@
             <% } else { %>
                 <li><a href="${pageContext.request.contextPath}/userhome">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/view">View Disaster</a></li>
-                <li><a href="${pageContext.request.contextPath}/userhome">About Us</a></li>
-                <li><a href="${pageContext.request.contextPath}/userhome">Contact Us</a></li>
+                <li><a href="${pageContext.request.contextPath}/aboutus">About Us</a></li>
+                <li><a href="${pageContext.request.contextPath}/contactus">Contact Us</a></li>
             <% } %>
         </ul>
 
