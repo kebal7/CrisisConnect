@@ -95,9 +95,7 @@
             <input type="text" name="address" value="${address_val}" placeholder="Address" required/>
             
             <select name="usertype" required>
-        		<option value="" disabled selected>Select User Type</option>
-        		<option value="user" ${usertype_val == 'user' ? "selected" : ""}>User</option>
-        		<option value="admin" ${usertype_val == 'admin' ? "selected" : ""}>Admin</option>
+        		<option value="user">User</option>
     		</select>
             
             <input type="submit" value="Register" />

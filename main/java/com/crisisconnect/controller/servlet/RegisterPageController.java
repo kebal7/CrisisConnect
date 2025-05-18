@@ -55,6 +55,7 @@ public class RegisterPageController extends HttpServlet {
 		String dob = request.getParameter("dob");
 		String address = request.getParameter("address");
 		String userType = request.getParameter("usertype");
+		userType = "user";
 		String imagePath = "null";
         
 		// 🛡️ FIELD VALIDATIONS
