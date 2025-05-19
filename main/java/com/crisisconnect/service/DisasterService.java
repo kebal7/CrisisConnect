@@ -12,6 +12,16 @@ import java.util.Map;
 import com.crisisconnect.config.DbConfig;
 import com.crisisconnect.model.DisasterModel;
 
+/**
+* @author Kebal Badal LMU ID: 23048668
+*/
+
+/**
+ * The {@code DisasterService} class provides methods to interact with the `disasterrecord` table
+ * in the database. It handles database operations such as creating, retrieving, updating, and
+ * deleting disaster records.
+ */
+
 public class DisasterService {
 	private Connection dbConn;
 	
