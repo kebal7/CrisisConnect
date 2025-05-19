@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/nav.css" />
 
 <meta charset="UTF-8">
-<title>Admin Home</title>
+<title>User Home</title>
 
 <style>
 body {
